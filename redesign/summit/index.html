@@ -96,7 +96,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,249,241,.85);backdro
 
 /* HERO */
 .hero{background:radial-gradient(120% 130% at 80% 10%,#3c2a18 0%,#241910 55%,#1b120a 100%);color:#f3e8d6;overflow:hidden;padding:0}
-.hero .inner{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center;padding:88px 0 110px}
+.hero .inner{display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center;padding:88px 28px 110px}
 .hero h1{font-family:var(--disp);color:#fff;font-size:clamp(3.3rem,7.2vw,6rem);font-weight:600;letter-spacing:0;line-height:1.04;margin:1.1rem 0}
 .hero h1 .gold{color:var(--gold-b)}
 .hero h1 .teal{color:var(--teal)}
@@ -112,7 +112,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,249,241,.85);backdro
 
 /* TRUST */
 .trust{background:#1b120a;color:#cdb89c;position:relative}
-.trust .wrap{padding:24px 0}
+.trust .wrap{padding:24px 28px}
 .trust .row{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;align-items:center;font-family:var(--disp);font-weight:600}
 .trust .row span{display:flex;align-items:center;gap:10px;font-size:.96rem}
 .trust .row b{color:var(--gold-b);font-weight:800}
@@ -215,13 +215,13 @@ footer .soc a:hover{background:var(--clay)}
   .submenu{position:static;transform:none;box-shadow:none;border:none;border-radius:0;padding:0;background:var(--sand);min-width:0}
   .submenu a{padding:13px 40px;font-size:.98rem;border-bottom:1px solid var(--line);white-space:normal}
   .hero .inner,.pr,.feat,.vp,.tg,.sgrid,.tst,footer .cols{grid-template-columns:1fr}
-  .hero .inner{padding:64px 0 80px;gap:40px}.hero-photo{max-width:420px}
+  .hero .inner{padding:60px 22px 78px;gap:42px}.hero-photo{max-width:420px;margin:0 auto}
   .pr .ph{order:-1}.pr .ph::before{inset:12px -12px -12px 12px}.sgrid::before{display:none}
   .tcar-nav{display:none}.t{flex-basis:260px}
-  .trust .row{gap:22px}section{padding:74px 0}
+  .trust .row{gap:22px}section{padding:80px 0}
 }
 @media(max-width:560px){
-  .wrap{padding:0 20px}.hero h1{font-size:2.6rem}
+  .wrap{padding:0 24px}.hero h1{font-size:2.6rem}
   .nav img{height:36px}.nav .btn{padding:.46rem .8rem;font-size:.72rem}
   .trust .row{gap:16px;font-size:.86rem}
 }

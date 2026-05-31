@@ -201,10 +201,10 @@ footer .soc a:hover{background:var(--bronze)}
   .hero .grid,.pract,.feat,.vp,.stp,.tst,footer .cols{grid-template-columns:1fr}
   .pract img{order:-1}.chip.tl{left:8px}.chip.br{right:8px}
   .tcar-nav{display:none}.t{flex-basis:260px}
-  section{padding:72px 0}.band,.steps-w,.final{margin:0 14px}
+  section{padding:80px 0}.band,.steps-w,.final{margin:0 14px}
 }
 @media(max-width:560px){
-  .wrap{padding:0 20px}.hero h1{font-size:2.4rem}
+  .wrap{padding:0 24px}.hero h1{font-size:2.4rem}
   .nav img{height:36px}.nav .btn{padding:.58rem .85rem;font-size:.76rem}
   .chip{padding:10px 12px}.chip b{font-size:1.15rem}.chip span{font-size:.7rem}
   .hero-media .main{border-radius:90px 90px 24px 24px}
@@ -291,7 +291,7 @@ function render(m){
       <div class="tcar">${m.treatments.map(t=>`<div class="t"><div class="im"><img src="../../${t.image}" alt="${J(t.name)}" loading="lazy"></div><div class="bd"><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="lk" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div></div>`).join('')}</div></div>
   </div></section>
 
-  <section class="steps-w" id="process"><div class="wrap" style="padding:84px 0">
+  <section class="steps-w" id="process"><div class="wrap" style="padding:84px 28px">
     <div class="intro reveal"><span class="eyebrow">${J(steps.intro?'Simple Process':'')}</span><h2 style="margin-top:.4rem">${J(steps.heading)}</h2><p style="color:#cfc6dc">${J(steps.intro)}</p></div>
     <div class="stp">${steps.steps.map(s=>`<div class="s reveal"><div class="n">${J(s.num)}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
   </div></section>
