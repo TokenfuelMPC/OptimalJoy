@@ -48,6 +48,9 @@ section{padding:104px 0;position:relative}
 .hero .glow{position:absolute;top:-70px;right:6%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(214,162,63,.55),transparent 62%);filter:blur(18px);z-index:1;pointer-events:none;animation:glowpulse 6.5s ease-in-out infinite}
 .hero .embers{position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none}
 .hero .mtns{position:absolute;left:0;right:0;bottom:-3%;width:100%;height:84%;z-index:0;pointer-events:none}
+@keyframes fogdrift{0%{transform:translateX(-5%)}100%{transform:translateX(5%)}}
+.hero .fogfx{position:absolute;left:0;right:0;bottom:0;height:64%;z-index:1;pointer-events:none;overflow:hidden}
+.hero .fogfx span{position:absolute;left:-25%;width:150%;height:140px;background:radial-gradient(ellipse 55% 100% at 50% 50%,rgba(231,221,204,.22),transparent 72%);filter:blur(11px);animation:fogdrift ease-in-out infinite alternate}
 .ember{position:absolute;bottom:140px;width:7px;height:7px;border-radius:50%;background:var(--gold-b);filter:blur(.5px);opacity:0;animation:rise linear infinite}
 .hero-photo .frame img{height:112%;will-change:transform}
 .trail-bg,.final-bg{position:absolute;inset:-14% 0;background-size:cover;background-position:center;will-change:transform}
@@ -247,18 +250,24 @@ const RIDGE=`<svg class="ridge" viewBox="0 0 1440 200" preserveAspectRatio="none
   <path d="M0,120 C120,96 230,150 360,118 C500,84 620,150 760,112 C900,76 1020,146 1180,110 C1300,84 1380,128 1440,112 L1440,200 L0,200 Z" fill="url(#r1)" opacity=".85"/>
   <path d="M0,150 C160,128 280,176 440,150 C600,126 720,178 900,150 C1060,126 1200,176 1360,150 C1410,142 1430,156 1440,152 L1440,200 L0,200 Z" fill="url(#r2)"/>
 </svg>`;
-const MOUNTAINS=`<svg class="mtns" data-px="0.05" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" xmlns="${SVG}">
-  <defs>
-  <linearGradient id="far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3acba"/><stop offset="1" stop-color="#827782"/></linearGradient>
-  <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a6856"/><stop offset="1" stop-color="#51402f"/></linearGradient>
-  <linearGradient id="near" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#43331f"/><stop offset="1" stop-color="#241910"/></linearGradient>
-  </defs>
-  <path d="M0,300 L120,250 L260,300 L400,222 L560,295 L720,205 L900,288 L1080,232 L1260,300 L1440,248 L1440,620 L0,620 Z" fill="url(#far)" opacity=".42"/>
-  <rect x="0" y="298" width="1440" height="82" fill="#e0d3bd" opacity=".09"/>
-  <path d="M0,382 L160,312 L320,378 L500,300 L680,372 L860,296 L1060,378 L1260,318 L1440,378 L1440,620 L0,620 Z" fill="url(#mid)" opacity=".62"/>
-  <rect x="0" y="396" width="1440" height="66" fill="#e0d3bd" opacity=".07"/>
-  <path d="M0,472 L200,402 L380,472 L560,398 L760,468 L980,402 L1200,472 L1440,412 L1440,620 L0,620 Z" fill="url(#near)" opacity=".88"/>
-</svg>`;
+function buildMountains(){
+  const W=1440,H=760;
+  const ridge=(b,a,k,p)=>{let d='M0,'+H+' L0,'+b.toFixed(0);for(let i=0;i<=72;i++){const x=W*i/72;const y=b-a*(0.55*Math.sin(x*0.0046*k+p)+0.3*Math.sin(x*0.013*k+p*1.7)+0.15*Math.sin(x*0.027+p));d+=' L'+x.toFixed(0)+','+y.toFixed(1);}return d+' L'+W+','+H+' Z';};
+  const trees=(b,a)=>{let d='M0,'+H+' L0,'+b.toFixed(0);let x=0,i=0;while(x<=W){const base=b-a*Math.sin(x*0.0042+1.2);const th=9+((i*13)%22);const tw=7+((i*5)%6);d+=' L'+x.toFixed(0)+','+base.toFixed(1)+' L'+(x+tw/2).toFixed(1)+','+(base-th).toFixed(1)+' L'+(x+tw).toFixed(1)+','+base.toFixed(1);x+=tw;i++;}return d+' L'+W+','+H+' Z';};
+  const lay=[[300,46,1.0,0.3,'#aeb3c0',0.22],[358,54,1.3,1.1,'#8d8794',0.34],[418,58,1.6,2.0,'#6c6168',0.5],[484,60,1.15,3.3,'#4a3a30',0.72]];
+  const paths=lay.map(L=>'<path d="'+ridge(L[0],L[1],L[2],L[3])+'" fill="'+L[4]+'" opacity="'+L[5]+'"/>').join('');
+  const fog='<g filter="url(#fog)" fill="#e7ddcc">'
+    +'<ellipse cx="380" cy="352" rx="400" ry="34" opacity=".24"/>'
+    +'<ellipse cx="1060" cy="408" rx="440" ry="30" opacity=".2"/>'
+    +'<ellipse cx="700" cy="470" rx="540" ry="34" opacity=".18"/>'
+    +'<ellipse cx="170" cy="506" rx="340" ry="26" opacity=".16"/>'
+    +'<ellipse cx="1240" cy="500" rx="360" ry="24" opacity=".15"/></g>';
+  const forest='<path d="'+trees(556,28)+'" fill="#221710" opacity=".97"/>';
+  return '<svg class="mtns" data-px="0.05" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMax slice" xmlns="'+SVG+'">'
+    +'<defs><filter id="fog" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="22"/></filter></defs>'
+    +paths+fog+forest+'</svg>';
+}
+const MOUNTAINS=buildMountains();
 function toggleNav(btn){const h=document.querySelector('header');const open=h.classList.toggle('nav-open');if(btn)btn.innerHTML=open?'✕':'☰';}
 function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';document.querySelectorAll('.navitem.open').forEach(n=>n.classList.remove('open'));}
 function toggleSub(btn){btn.closest('.navitem').classList.toggle('open');}
@@ -281,7 +290,7 @@ function render(m){
   </div></header>
   <a id="top"></a>
 
-  <section class="hero grain"><div class="glow"></div><div class="embers">${[...Array(10)].map((_,i)=>`<span class="ember" style="left:${5+i*9}%;animation-duration:${7+(i%4)*2}s;animation-delay:${(i*0.7).toFixed(1)}s"></span>`).join('')}</div>${MOUNTAINS}<div class="wrap inner">
+  <section class="hero grain"><div class="glow"></div><div class="embers">${[...Array(10)].map((_,i)=>`<span class="ember" style="left:${5+i*9}%;animation-duration:${7+(i%4)*2}s;animation-delay:${(i*0.7).toFixed(1)}s"></span>`).join('')}</div>${MOUNTAINS}<div class="fogfx"><span style="bottom:34%;animation-duration:21s"></span><span style="bottom:18%;animation-duration:29s;animation-delay:-7s"></span><span style="bottom:4%;animation-duration:25s;animation-delay:-3s"></span></div><div class="wrap inner">
     <div class="reveal">
       <span class="kw">Rooted in the foothills of the Smokies · ${J(m.contact.address.city)}, ${J(m.contact.address.state)}</span>
       <h1>Strength, beauty<br>&amp; <span class="gold">lasting</span> <span class="teal">renewal</span>.</h1>
