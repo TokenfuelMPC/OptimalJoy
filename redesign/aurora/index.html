@@ -56,7 +56,7 @@ body::after{content:"";position:fixed;inset:0;background:var(--grain);background
 .fcard:hover,.t:hover{box-shadow:0 30px 70px rgba(34,26,51,.16)}
 
 /* blobs */
-.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite;will-change:transform}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.3;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite;will-change:transform}
 
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(251,247,242,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
@@ -83,7 +83,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,247,242,.8);backdrop
 
 /* hero */
 .hero{padding:70px 0 90px;overflow:hidden}
-.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative;z-index:2}
 .hero h1{font-size:clamp(2.7rem,6vw,5rem);color:var(--ink);margin:.5rem 0 1.2rem}
 .hero p{font-size:1.12rem;max-width:30rem;margin-bottom:2rem}
 .hero .cta-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
@@ -243,7 +243,7 @@ function render(m){
 
   <section class="hero"><div class="blob" style="width:520px;height:520px;background:var(--blush);top:-120px;right:-120px;animation-delay:-2s"></div>
   <div class="blob" style="width:420px;height:420px;background:#d8f3ee;bottom:-160px;left:-140px;animation-delay:-9s"></div>
-  <div class="blob" style="width:280px;height:280px;background:#f3d6c2;top:46%;left:56%;opacity:.38;animation-delay:-5s"></div>
+  <div class="blob" style="width:280px;height:280px;background:#f3d6c2;top:46%;left:56%;opacity:.22;animation-delay:-5s"></div>
   <div class="wrap grid">
     <div class="reveal">
       <span class="eyebrow">${J(id('hero').tagline)}</span>
