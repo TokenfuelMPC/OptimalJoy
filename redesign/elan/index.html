@@ -81,15 +81,21 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,251,248,.85);backdro
 /* treatments editorial */
 .theads{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
 .theads h2{font-size:clamp(2.2rem,4.6vw,3.4rem)}
-.tlist{margin-top:40px;border-top:1px solid var(--line)}
-.trow{display:grid;grid-template-columns:64px 1.1fr 2fr auto;gap:30px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:.3s}
-.trow:hover{padding-left:14px;background:linear-gradient(90deg,var(--sand),transparent)}
-.trow .idx{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:1.3rem}
-.trow h3{font-family:var(--serif);font-size:1.5rem;color:var(--ink)}
-.trow p{font-size:.95rem;margin:0}
-.trow .go{font-family:var(--sans);font-weight:700;color:var(--teal-d);white-space:nowrap;font-size:.9rem}
-.tthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px}
-.tthumbs img{aspect-ratio:1/1;object-fit:cover;border-radius:6px}
+.tcar-ctrls{display:flex;gap:10px;align-self:flex-end}
+.tcar-nav{width:46px;height:46px;border-radius:6px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:1.3rem;line-height:1;display:grid;place-items:center;transition:.2s}
+.tcar-nav:hover{background:var(--ink);color:#fff}
+.tcar-wrap{position:relative;margin-top:40px}
+.tcar{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 16px;scrollbar-width:none}
+.tcar::-webkit-scrollbar{display:none}
+.t{flex:0 0 264px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:.3s}
+.t:hover{box-shadow:var(--sh);transform:translateY(-6px)}
+.t .im{height:150px;overflow:hidden}
+.t .im img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.t:hover .im img{transform:scale(1.06)}
+.t .bd{padding:22px;display:flex;flex-direction:column;flex:1}
+.t .bd h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--ink);margin-bottom:8px}
+.t .bd p{font-size:.9rem;margin-bottom:16px}
+.t .bd .go{margin-top:auto;font-family:var(--sans);font-weight:700;color:var(--teal-d);font-size:.88rem}
 
 /* steps */
 .steps{background:var(--ink);color:#fff}
@@ -138,8 +144,7 @@ footer .soc a:hover{background:var(--bronze);border-color:var(--bronze)}
   .links a:last-child{border-bottom:none}
   .split,.elist,.sgrid,footer .cols{grid-template-columns:1fr}
   .elist .e,.metarow .m{border-right:none;border-bottom:1px solid var(--line)}
-  .trow{grid-template-columns:40px 1fr;gap:14px}.trow p,.trow .go{grid-column:2}
-  .tthumbs{grid-template-columns:repeat(2,1fr)}section{padding:74px 0}
+  .tcar-ctrls{display:none}.t{flex-basis:260px}section{padding:74px 0}
 }
 @media(max-width:560px){
   .wrap,.narrow{padding:0 20px}.hero h1{font-size:2.7rem}
@@ -157,6 +162,7 @@ const J=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 const BOOK="https://www.optimantra.com/optimus/om/patient/login";const SITE="https://www.optimaljoylife.com";
 function toggleNav(btn){const h=document.querySelector('header');const open=h.classList.toggle('nav-open');if(btn)btn.innerHTML=open?'✕':'☰';}
 function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';}
+function scrollTreat(btn,dir){const car=(btn.closest('.tcar-wrap')||btn.closest('section')).querySelector('.tcar');const c=car.querySelector('.t');const step=c?c.getBoundingClientRect().width+20:284;car.scrollBy({left:dir*step,behavior:'smooth'});}
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
   const hs=m.homepage.sections,id=x=>hs.find(s=>s.id===x);
@@ -205,9 +211,9 @@ function render(m){
   </div></section>
 
   <section id="treatments" style="background:#fff"><div class="wrap">
-    <div class="theads reveal"><div><span class="kw">What We Offer</span><h2 style="margin-top:.6rem">${J(id('treatments').heading)}</h2></div><a class="btn teal" href="${BOOK}" target="_blank" rel="noopener">Book a Visit</a></div>
-    <div class="tlist">${m.treatments.map((t,i)=>`<div class="trow reveal"><div class="idx">0${i+1}</div><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="go" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div>`).join('')}</div>
-    <div class="tthumbs reveal">${m.treatments.slice(0,4).map(t=>`<img src="../../${t.image}" alt="${J(t.name)}" loading="lazy">`).join('')}</div>
+    <div class="theads reveal"><div><span class="kw">What We Offer</span><h2 style="margin-top:.6rem">${J(id('treatments').heading)}</h2></div>
+      <div class="tcar-ctrls"><button class="tcar-nav prev" aria-label="Previous" onclick="scrollTreat(this,-1)">‹</button><button class="tcar-nav next" aria-label="Next" onclick="scrollTreat(this,1)">›</button></div></div>
+    <div class="tcar-wrap reveal"><div class="tcar">${m.treatments.map(t=>`<div class="t"><div class="im"><img src="../../${t.image}" alt="${J(t.name)}" loading="lazy"></div><div class="bd"><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="go" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div></div>`).join('')}</div></div>
   </div></section>
 
   <section class="steps" id="process"><div class="wrap reveal">
