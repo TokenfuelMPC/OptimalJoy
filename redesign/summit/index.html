@@ -37,6 +37,8 @@ section{padding:100px 0;position:relative}
 header{position:sticky;top:0;z-index:50;background:rgba(251,253,252,.82);backdrop-filter:blur(13px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
 .nav img{height:48px}
+.nav .btn{padding:.46rem 1rem;font-size:.76rem;background:transparent;color:var(--ink);border:1.5px solid var(--teal-d)}
+.nav .btn:hover{background:var(--teal-d);color:#fff;transform:none;box-shadow:none}
 .links{display:flex;gap:34px;align-items:center}
 .links a{font-weight:600;font-size:.94rem;color:var(--ink)}
 .links a:hover{color:var(--teal-d)}
@@ -168,7 +170,7 @@ function render(m){
   <header><div class="wrap nav">
     <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
     <nav class="links"><a href="#treatments">Treatments</a><a href="#about">Meet Traci</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
-    <a class="btn bronze" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
+    <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
   <a id="top"></a>

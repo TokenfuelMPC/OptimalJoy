@@ -42,6 +42,8 @@ section{padding:104px 0;position:relative}
 header{position:sticky;top:0;z-index:50;background:rgba(251,247,242,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
 .nav img{height:48px}
+.nav .btn{padding:.46rem 1rem;font-size:.76rem;font-weight:600;background:transparent;color:var(--ink);border:1.5px solid var(--bronze)}
+.nav .btn:hover{background:var(--bronze);color:#fff;transform:none;box-shadow:none}
 .links{display:flex;gap:34px;align-items:center}
 .links a{font-weight:600;font-size:.94rem;color:var(--ink);position:relative}
 .links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--bronze);transition:.3s}
@@ -194,7 +196,7 @@ function render(m){
       </div>
     </div>
     <div class="hero-media reveal">
-      <img class="main" src="../../assets/images/practitioner-traci.jpg" alt="OptimalJoy">
+      <img class="main" src="../../assets/images/introduction-image.jpg" alt="Radiant OptimalJoy patient">
       <div class="chip tl"><div class="dot">★</div><div><b>5.0</b><span>Client rated</span></div></div>
       <div class="chip br"><div class="dot">7</div><div><b>Treatments</b><span>Wellness & aesthetics</span></div></div>
     </div>
@@ -212,7 +214,7 @@ function render(m){
   </div></div></section>
 
   <section id="about"><div class="wrap pract">
-    <img class="reveal" src="../../assets/images/introduction-image.jpg" alt="${J(pr.name)}">
+    <img class="reveal" src="../../assets/images/practitioner-traci.jpg" alt="${J(pr.name)}">
     <div class="reveal">
       <span class="eyebrow">${J(pr.eyebrow)}</span>
       <h2>${J(pr.name.split(' ').slice(0,2).join(' '))} <span class="serif-it">${J(pr.name.split(' ').slice(2).join(' '))}</span></h2>
