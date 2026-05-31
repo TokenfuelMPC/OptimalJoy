@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OptimalJoy · Summit — Wellness &amp; Aesthetics</title>
+<meta name="description" content="OptimalJoy Wellness & Aesthetics — rooted in the foothills of the Smokies, Maryville, TN."/>
+<link rel="icon" href="../../assets/logo/Optimal-Joy-Logo.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bronze:#C4926b; --bronze-d:#a9774f; --teal:#38C5B5; --teal-d:#2DA194; --pine:#1f5a52;
+  --mist:#eef5f4; --sky:#dff0ee; --sand:#f5efe6; --cloud:#fbfdfc; --ink:#1c2b29; --text:#566460; --muted:#9aa7a3; --line:#e3ece9;
+  --disp:'Outfit',system-ui,sans-serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --r:26px; --sh:0 24px 60px rgba(31,90,82,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--cloud);line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
+h1,h2,h3,h4{font-family:var(--disp);color:var(--ink);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+section{padding:100px 0;position:relative}
+.kw{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-size:.73rem;font-weight:700;color:var(--teal-d);display:inline-flex;align-items:center;gap:10px}
+.kw::before{content:"▲";font-size:.7rem;color:var(--bronze)}
+.btn{font-family:var(--sans);display:inline-flex;align-items:center;gap:.5em;background:var(--teal-d);color:#fff;font-weight:700;padding:.95rem 1.9rem;border-radius:100px;border:none;cursor:pointer;transition:.25s;font-size:.95rem}
+.btn:hover{background:var(--teal);transform:translateY(-3px);box-shadow:0 14px 30px rgba(56,197,181,.35)}
+.btn.bronze{background:var(--bronze)}.btn.bronze:hover{background:var(--bronze-d);box-shadow:0 14px 30px rgba(196,146,107,.35)}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.btn.ghost:hover{background:var(--sand);color:var(--ink)}
+.reveal{opacity:0;transform:translateY(32px);transition:.85s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+header{position:sticky;top:0;z-index:50;background:rgba(251,253,252,.82);backdrop-filter:blur(13px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:84px}
+.nav img{height:48px}
+.links{display:flex;gap:34px;align-items:center}
+.links a{font-weight:600;font-size:.94rem;color:var(--ink)}
+.links a:hover{color:var(--teal-d)}
+.burger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+
+/* hero with mountains */
+.hero{background:linear-gradient(180deg,var(--sky) 0%,var(--mist) 55%,var(--cloud) 100%);text-align:center;padding:80px 0 0;overflow:hidden;position:relative}
+.hero .sun{position:absolute;top:60px;left:50%;transform:translateX(-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(196,146,107,.45),transparent 65%);filter:blur(6px)}
+.hero h1{font-size:clamp(2.8rem,7vw,5.6rem);color:var(--ink);margin:1.2rem 0 1rem;position:relative}
+.hero h1 .hl{color:var(--teal-d)}
+.hero p{max-width:33rem;margin:0 auto 2rem;font-size:1.12rem;position:relative}
+.hero .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;margin-bottom:70px}
+.ridge{display:block;width:100%;margin-bottom:-6px;position:relative;z-index:1}
+
+/* trust strip */
+.trust{background:var(--ink);color:#cfe0dc;padding:26px 0}
+.trust .row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;align-items:center;font-family:var(--disp);font-weight:600;letter-spacing:.02em}
+.trust .row span{display:flex;align-items:center;gap:10px}
+.trust .row b{color:var(--bronze)}
+
+/* features cards */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:36px 30px;transition:.3s}
+.fc:hover{transform:translateY(-8px);box-shadow:var(--sh)}
+.fc .ic{width:58px;height:58px;border-radius:18px;background:var(--mist);display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px}
+.fc h3{font-size:1.4rem;margin-bottom:.4rem}
+
+/* intro */
+.intro{text-align:center;max-width:760px;margin:0 auto}
+.intro h2{font-size:clamp(2rem,4.2vw,3.1rem)}
+.vp{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+.vp .v{text-align:center;background:var(--sand);border-radius:var(--r);padding:34px 26px}
+.vp .v .n{width:60px;height:60px;border-radius:50%;background:#fff;display:grid;place-items:center;margin:0 auto 16px;font-size:1.4rem;box-shadow:var(--sh)}
+.vp .v h3{font-size:1.25rem;margin-bottom:.3rem}
+
+/* practitioner */
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.pr .ph{position:relative}
+.pr .ph img{border-radius:var(--r);box-shadow:var(--sh)}
+.pr .ph::before{content:"";position:absolute;inset:-14px -14px 20px 20px;border:2px solid var(--teal);border-radius:var(--r);z-index:-1;opacity:.5}
+.pr h2{font-size:clamp(2rem,4.2vw,3.1rem);margin:.6rem 0 .4rem}
+.pr .role{color:var(--bronze);font-weight:700;font-family:var(--sans)}
+
+/* treatments */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+.t{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.35s;display:flex;flex-direction:column}
+.t:hover{transform:translateY(-8px);box-shadow:var(--sh)}
+.t .im{aspect-ratio:4/3;overflow:hidden;position:relative}
+.t .im img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.t:hover .im img{transform:scale(1.07)}
+.t .bd{padding:24px;display:flex;flex-direction:column;flex:1}
+.t h3{font-size:1.25rem;margin-bottom:.4rem}
+.t p{font-size:.92rem;margin-bottom:16px}
+.t .lk{margin-top:auto;font-weight:700;color:var(--teal-d);font-family:var(--sans);font-size:.9rem}
+
+/* steps as trail */
+.trail{background:linear-gradient(180deg,var(--mist),var(--cloud));position:relative}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px;position:relative}
+.sgrid::before{content:"";position:absolute;top:34px;left:12%;right:12%;height:2px;background:repeating-linear-gradient(90deg,var(--bronze) 0 10px,transparent 10px 20px);z-index:0}
+.sgrid .s{text-align:center;position:relative;z-index:1}
+.sgrid .s .pin{width:68px;height:68px;border-radius:50%;background:#fff;border:2px solid var(--teal);display:grid;place-items:center;margin:0 auto 18px;font-family:var(--disp);font-weight:800;color:var(--teal-d);font-size:1.3rem;box-shadow:var(--sh)}
+.sgrid .s h3{font-size:1.4rem;margin-bottom:.4rem}
+
+/* testimonials */
+.tst{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.q{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:36px;box-shadow:var(--sh)}
+.q .stars{color:var(--bronze);letter-spacing:3px;margin-bottom:12px}
+.q p{font-size:1.06rem;color:var(--ink)}
+.q .who{font-family:var(--disp);font-weight:700;color:var(--ink);margin-top:16px}
+
+/* final */
+.final{text-align:center;position:relative;background:linear-gradient(180deg,var(--cloud),var(--sky));overflow:hidden}
+.final h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch;margin:0 auto 1.2rem;position:relative}
+.final .ridge{position:absolute;bottom:0;left:0}
+
+footer{background:var(--ink);color:#bccfca;padding:80px 0 32px;position:relative}
+footer .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:46px}
+footer img{height:52px;margin-bottom:20px}
+footer h4{font-family:var(--disp);color:#fff;font-size:.95rem;letter-spacing:.04em;margin-bottom:14px}
+footer a:hover{color:var(--bronze)}
+footer .soc{display:flex;gap:12px;margin-top:16px}
+footer .soc a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#fff}
+footer .soc a:hover{background:var(--teal-d)}
+.fb{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.83rem;color:var(--muted)}
+
+.badge{position:fixed;left:14px;bottom:14px;z-index:60;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh);font-size:.72rem;padding:8px 14px;border-radius:100px;font-weight:700}
+.switch{position:fixed;right:14px;bottom:14px;z-index:60;display:flex;gap:6px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:100px;padding:6px}
+.switch a{font-size:.74rem;font-weight:700;padding:7px 12px;border-radius:100px;color:var(--muted)}
+.switch a.on{background:var(--ink);color:#fff}
+
+@media(max-width:920px){
+  .links{display:none}.burger{display:block}
+  .pr,.feat,.vp,.tg,.sgrid,.tst,footer .cols{grid-template-columns:1fr}
+  .pr .ph{order:-1}.sgrid::before{display:none}.trust .row{gap:24px}section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="badge">Summit · Concept 3</div>
+<div class="switch"><a href="../aurora/">Aurora</a><a href="../elan/">Élan</a><a class="on" href="../summit/">Summit</a></div>
+<script>
+const J=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const BOOK="https://www.optimantra.com/optimus/om/patient/login";const SITE="https://www.optimaljoylife.com";
+const RIDGE=`<svg class="ridge" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:160px">
+  <path d="M0,200 L0,120 L160,150 L320,90 L480,140 L640,70 L820,130 L1000,80 L1180,140 L1320,100 L1440,150 L1440,220 Z" fill="#cfe6e1" opacity=".7"/>
+  <path d="M0,210 L0,160 L200,120 L380,170 L560,110 L760,165 L960,120 L1160,175 L1340,130 L1440,170 L1440,220 Z" fill="#9cc9c1" opacity=".7"/>
+  <path d="M0,220 L0,185 L240,150 L460,190 L680,150 L900,195 L1140,155 L1380,195 L1440,180 L1440,220 Z" fill="#2DA194"/>
+</svg>`;
+fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
+function render(m){
+  const hs=m.homepage.sections,id=x=>hs.find(s=>s.id===x);
+  const slides=id('feature-slides').slides,vp=id('value-props').items,pr=id('practitioner'),
+        steps=id('steps'),welcome=id('welcome'),tst=id('testimonials');
+  document.getElementById('app').innerHTML=`
+  <header><div class="wrap nav">
+    <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
+    <nav class="links"><a href="#treatments">Treatments</a><a href="#about">Meet Traci</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
+    <a class="btn bronze" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
+    <button class="burger" onclick="document.querySelector('.links').style.display='flex'">&#9776;</button>
+  </div></header>
+  <a id="top"></a>
+
+  <section class="hero"><div class="sun"></div><div class="wrap">
+    <div class="reveal" style="position:relative">
+      <span class="kw" style="justify-content:center;display:inline-flex">Rooted in the foothills of the Smokies · ${J(m.contact.address.city)}, ${J(m.contact.address.state)}</span>
+      <h1>Rise to your <span class="hl">most radiant</span> self.</h1>
+      <p>${J(welcome.body)}</p>
+      <div class="row"><a class="btn bronze" href="${BOOK}" target="_blank" rel="noopener">Book Appointment →</a><a class="btn ghost" href="#treatments">Explore Treatments</a></div>
+    </div>
+  </div>${RIDGE}</section>
+
+  <section class="trust" style="padding:26px 0"><div class="wrap"><div class="row">
+    <span><b>★ 5.0</b> Client rated</span><span><b>7</b> Signature treatments</span><span><b>1:1</b> Personalized care</span><span><b>By appointment</b> only</span>
+  </div></div></section>
+
+  <section><div class="wrap">
+    <div class="feat">${slides.map((s,i)=>`<div class="fc reveal" style="transition-delay:${i*90}ms"><div class="ic">${['🌿','✦','☀️'][i]||'✦'}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
+  </div></section>
+
+  <section style="background:var(--sand)"><div class="wrap">
+    <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">${J(m.site.tagline)}</span><h2 style="margin-top:.6rem">${J(welcome.heading)}</h2><p style="font-size:1.08rem;margin-top:1rem">${J(welcome.body)}</p></div>
+    <div class="vp">${vp.map((v,i)=>`<div class="v reveal" style="transition-delay:${i*80}ms"><div class="n">${['💧','🤝','✨'][i]||'•'}</div><h3>${J(v.title)}</h3><p>${J(v.body)}</p></div>`).join('')}</div>
+  </div></section>
+
+  <section id="about"><div class="wrap pr">
+    <div class="ph reveal"><img src="../../assets/images/introduction-image.jpg" alt="${J(pr.name)}"></div>
+    <div class="reveal"><span class="kw">${J(pr.eyebrow)}</span><h2>${J(pr.name)}</h2><p class="role" style="margin-bottom:1rem">Founder &amp; Lead Practitioner</p><p style="font-size:1.08rem">${J(pr.body)}</p><a class="btn" style="margin-top:1.4rem" href="${BOOK}" target="_blank" rel="noopener">Book With Traci</a></div>
+  </div></section>
+
+  <section id="treatments" style="background:var(--mist)"><div class="wrap">
+    <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">What We Offer</span><h2 style="margin-top:.6rem">${J(id('treatments').heading)}</h2></div>
+    <div class="tg">${m.treatments.map((t,i)=>`<div class="t reveal" style="transition-delay:${(i%3)*80}ms"><div class="im"><img src="../../${t.image}" alt="${J(t.name)}" loading="lazy"></div><div class="bd"><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="lk" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div></div>`).join('')}</div>
+  </div></section>
+
+  <section class="trail" id="process"><div class="wrap">
+    <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">The Trailhead</span><h2 style="margin-top:.6rem">${J(steps.heading)}</h2><p style="margin-top:1rem">${J(steps.intro)}</p></div>
+    <div class="sgrid">${steps.steps.map(s=>`<div class="s reveal"><div class="pin">${J(s.num)}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">${J(tst.heading)}</span><h2 style="margin-top:.6rem">${J(tst.subheading)}</h2></div>
+    <div class="tst">${m.testimonials.map(q=>`<div class="q reveal"><div class="stars">${'★'.repeat(q.rating||5)}</div><p>&ldquo;${J(q.quote)}&rdquo;</p><div class="who">— ${J(q.name)}</div></div>`).join('')}</div>
+  </div></section>
+
+  <section class="final"><div class="wrap reveal" style="padding-bottom:120px">
+    <span class="kw" style="justify-content:center;display:inline-flex">${J(m.site.tagline)}</span>
+    <h2 style="margin-top:.8rem">${J(id('final-cta').heading)}</h2>
+    <a class="btn bronze" href="${BOOK}" target="_blank" rel="noopener">${J(id('final-cta').cta)} →</a>
+  </div>${RIDGE}</section>
+
+  <footer id="contact"><div class="wrap">
+    <div class="cols">
+      <div><img src="../../assets/logo/Optimal-Joy-Logo-WHITE.svg" alt="${J(m.site.name)}"><p>${J(m.footer.description)}</p>
+        <div class="soc">${m.social.map(s=>`<a href="${s.url}" target="_blank" rel="noopener" title="${J(s.platform)}">${s.platform[0]}</a>`).join('')}</div></div>
+      <div><h4>Visit</h4><p>${J(m.contact.address.street)}<br>${J(m.contact.address.city)}, ${J(m.contact.address.state)} ${J(m.contact.address.zip)}</p><p style="margin-top:10px">${J(m.contact.hours)}</p></div>
+      <div><h4>Contact</h4><p><strong>${J(m.contact.phone)}</strong> (${J(m.contact.phoneNote)})</p><p><a href="mailto:${m.contact.email}">${J(m.contact.email)}</a></p></div>
+    </div>
+    <div class="fb"><div>&copy; ${J(m.meta.generated.slice(0,4))} ${J(m.site.name)} · ${m.footer.legal.map(l=>`<a href="${SITE}${l.path}" target="_blank" rel="noopener">${J(l.label)}</a>`).join(' · ')}</div><div>Concept: Summit</div></div>
+  </div></footer>`;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+</script>
+</body>
+</html>

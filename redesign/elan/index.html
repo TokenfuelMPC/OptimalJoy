@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OptimalJoy · Élan — Wellness &amp; Aesthetics</title>
+<meta name="description" content="OptimalJoy Wellness & Aesthetics — Maryville, TN."/>
+<link rel="icon" href="../../assets/logo/Optimal-Joy-Logo.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bronze:#C4926b; --bronze-d:#a9774f; --teal:#38C5B5; --teal-d:#2DA194;
+  --paper:#fdfbf8; --sand:#f4ece2; --ink:#211c26; --text:#5c5660; --muted:#a59ead; --line:#e9e0d5;
+  --serif:'Playfair Display',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --sh:0 30px 70px rgba(33,28,38,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--ink);font-weight:600;line-height:1.1;letter-spacing:-.01em}
+.it{font-style:italic;font-weight:500}
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+.narrow{max-width:880px;margin:0 auto;padding:0 30px}
+section{padding:110px 0}
+.kw{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;font-weight:700;color:var(--bronze);display:inline-flex;align-items:center;gap:12px}
+.kw::before{content:"";width:30px;height:1px;background:var(--bronze)}
+.btn{font-family:var(--sans);display:inline-block;background:var(--ink);color:#fff;font-weight:600;padding:1rem 2rem;border-radius:4px;transition:.25s;border:none;cursor:pointer;font-size:.94rem;letter-spacing:.01em}
+.btn:hover{background:var(--bronze)}
+.btn.out{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.out:hover{background:var(--ink);color:#fff}
+.btn.teal{background:var(--teal-d)}.btn.teal:hover{background:var(--teal)}
+.reveal{opacity:0;transform:translateY(30px);transition:.85s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+hr.rule{border:none;border-top:1px solid var(--line);margin:0}
+
+header{position:sticky;top:0;z-index:50;background:rgba(253,251,248,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:86px}
+.nav img{height:46px}
+.links{display:flex;gap:38px;align-items:center}
+.links a{font-weight:600;font-size:.92rem;color:var(--ink)}
+.links a:hover{color:var(--bronze)}
+.burger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink)}
+
+/* hero editorial */
+.hero{padding:64px 0 40px;text-align:center;position:relative}
+.hero h1{font-size:clamp(3rem,8vw,6.4rem);color:var(--ink);margin:1.4rem 0 1rem;letter-spacing:-.02em}
+.hero p{max-width:34rem;margin:0 auto 2rem;font-size:1.12rem}
+.hero .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.heroimg{margin-top:64px;border-radius:6px;overflow:hidden;box-shadow:var(--sh);aspect-ratio:21/9}
+.heroimg img{width:100%;height:100%;object-fit:cover}
+.metarow{display:flex;justify-content:center;gap:0;margin-top:46px;flex-wrap:wrap}
+.metarow .m{padding:0 40px;text-align:center;border-right:1px solid var(--line)}
+.metarow .m:last-child{border:none}
+.metarow .m b{font-family:var(--serif);font-size:2.2rem;color:var(--ink);display:block;line-height:1}
+.metarow .m span{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+
+/* statement */
+.statement{background:var(--sand)}
+.statement h2{font-size:clamp(2rem,4.4vw,3.4rem);text-align:center}
+.statement p{text-align:center;font-size:1.16rem;max-width:52rem;margin:1.4rem auto 0}
+
+/* features editorial list */
+.elist{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:1px solid var(--line)}
+.elist .e{padding:40px 30px;border-right:1px solid var(--line)}
+.elist .e:last-child{border-right:none}
+.elist .e .no{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:1.2rem}
+.elist .e h3{font-size:1.5rem;margin:14px 0 8px}
+
+/* practitioner editorial split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.split img{border-radius:6px;box-shadow:var(--sh)}
+.split h2{font-size:clamp(2.2rem,4.6vw,3.4rem);margin:1rem 0}
+.split .sig{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--bronze)}
+
+/* treatments editorial */
+.theads{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.theads h2{font-size:clamp(2.2rem,4.6vw,3.4rem)}
+.tlist{margin-top:40px;border-top:1px solid var(--line)}
+.trow{display:grid;grid-template-columns:64px 1.1fr 2fr auto;gap:30px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:.3s}
+.trow:hover{padding-left:14px;background:linear-gradient(90deg,var(--sand),transparent)}
+.trow .idx{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:1.3rem}
+.trow h3{font-family:var(--serif);font-size:1.5rem;color:var(--ink)}
+.trow p{font-size:.95rem;margin:0}
+.trow .go{font-family:var(--sans);font-weight:700;color:var(--teal-d);white-space:nowrap;font-size:.9rem}
+.tthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px}
+.tthumbs img{aspect-ratio:1/1;object-fit:cover;border-radius:6px}
+
+/* steps */
+.steps{background:var(--ink);color:#fff}
+.steps .kw{color:var(--teal)}.steps .kw::before{background:var(--teal)}
+.steps h2{color:#fff;font-size:clamp(2.2rem,4.6vw,3.4rem)}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;margin-top:54px}
+.sgrid .s{border-top:2px solid var(--bronze);padding-top:22px}
+.sgrid .s .n{font-family:var(--serif);font-size:1.1rem;color:var(--bronze);letter-spacing:.2em}
+.sgrid .s h3{color:#fff;font-size:1.6rem;margin:.4rem 0 .6rem}
+.sgrid .s p{color:#c9c3d0}
+
+/* testimonials editorial */
+.quote-big{text-align:center;max-width:60rem;margin:0 auto}
+.quote-big p{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,3.4vw,2.4rem);color:var(--ink);line-height:1.4}
+.quote-big .who{font-family:var(--sans);font-weight:700;color:var(--bronze);margin-top:24px;letter-spacing:.04em}
+.qdots{display:flex;gap:10px;justify-content:center;margin-top:30px}
+.qdots button{width:10px;height:10px;border-radius:50%;border:none;background:var(--line);cursor:pointer}
+.qdots button.on{background:var(--bronze)}
+
+/* final */
+.final{background:var(--sand);text-align:center}
+.final h2{font-size:clamp(2.4rem,5.6vw,4rem);max-width:16ch;margin:0 auto 1.4rem}
+
+footer{background:var(--ink);color:#cdc6d2;padding:78px 0 32px}
+footer .cols{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:46px}
+footer img{height:50px;margin-bottom:20px}
+footer h4{font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;color:#fff;margin-bottom:16px}
+footer a:hover{color:var(--bronze)}
+footer .soc{display:flex;gap:12px;margin-top:16px}
+footer .soc a{width:40px;height:40px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;color:#fff}
+footer .soc a:hover{background:var(--bronze);border-color:var(--bronze)}
+.fb{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.83rem;color:var(--muted)}
+
+.badge{position:fixed;left:14px;bottom:14px;z-index:60;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh);font-size:.72rem;padding:8px 14px;border-radius:100px;font-weight:700}
+.switch{position:fixed;right:14px;bottom:14px;z-index:60;display:flex;gap:6px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:100px;padding:6px}
+.switch a{font-size:.74rem;font-weight:700;padding:7px 12px;border-radius:100px;color:var(--muted)}
+.switch a.on{background:var(--ink);color:#fff}
+
+@media(max-width:920px){
+  .links{display:none}.burger{display:block}
+  .split,.elist,.sgrid,footer .cols{grid-template-columns:1fr}
+  .elist .e,.metarow .m{border-right:none;border-bottom:1px solid var(--line)}
+  .trow{grid-template-columns:40px 1fr;gap:14px}.trow p,.trow .go{grid-column:2}
+  .tthumbs{grid-template-columns:repeat(2,1fr)}section{padding:74px 0}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="badge">Élan · Concept 2</div>
+<div class="switch"><a href="../aurora/">Aurora</a><a class="on" href="../elan/">Élan</a><a href="../summit/">Summit</a></div>
+<script>
+const J=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const BOOK="https://www.optimantra.com/optimus/om/patient/login";const SITE="https://www.optimaljoylife.com";
+fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
+function render(m){
+  const hs=m.homepage.sections,id=x=>hs.find(s=>s.id===x);
+  const slides=id('feature-slides').slides,vp=id('value-props').items,pr=id('practitioner'),
+        steps=id('steps'),welcome=id('welcome'),tst=id('testimonials');
+  document.getElementById('app').innerHTML=`
+  <header><div class="wrap nav">
+    <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
+    <nav class="links"><a href="#treatments">Treatments</a><a href="#about">Practitioner</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+    <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
+    <button class="burger" onclick="document.querySelector('.links').style.display='flex'">&#9776;</button>
+  </div></header>
+  <a id="top"></a>
+
+  <section class="hero"><div class="narrow reveal">
+    <span class="kw">${J(id('hero').tagline)} · Maryville, TN</span>
+    <h1>Beauty &amp; wellness,<br><span class="it">thoughtfully delivered.</span></h1>
+    <p>${J(welcome.body)}</p>
+    <div class="row"><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a><a class="btn out" href="#treatments">View Treatments</a></div>
+  </div>
+  <div class="wrap reveal"><div class="heroimg"><img src="../../assets/images/introduction-image.jpg" alt="OptimalJoy"></div>
+    <div class="metarow">
+      <div class="m"><b>7</b><span>Signature Treatments</span></div>
+      <div class="m"><b>5.0★</b><span>Client Rated</span></div>
+      <div class="m"><b>1:1</b><span>Personalized Care</span></div>
+    </div>
+  </div></section>
+
+  <section class="statement"><div class="narrow reveal">
+    <span class="kw" style="display:flex;justify-content:center">${J(m.site.tagline)}</span>
+    <h2 style="margin-top:1rem">${J(welcome.heading)}</h2>
+    <p>${J(welcome.body)}</p>
+  </div>
+  <div class="wrap"><div class="elist">${vp.map((v,i)=>`<div class="e reveal" style="transition-delay:${i*80}ms"><div class="no">0${i+1}</div><h3>${J(v.title)}</h3><p>${J(v.body)}</p></div>`).join('')}</div></div>
+  </section>
+
+  <section id="about"><div class="wrap split">
+    <img class="reveal" src="../../assets/images/practitioner-traci.jpg" alt="${J(pr.name)}">
+    <div class="reveal">
+      <span class="kw">${J(pr.eyebrow)}</span>
+      <h2>${J(pr.name)}</h2>
+      <p class="sig">Founder &amp; Lead Practitioner</p>
+      <p style="font-size:1.08rem;margin-top:1rem">${J(pr.body)}</p>
+      <a class="btn out" style="margin-top:1.6rem" href="${BOOK}" target="_blank" rel="noopener">Book With Traci</a>
+    </div>
+  </div></section>
+
+  <section id="treatments" style="background:#fff"><div class="wrap">
+    <div class="theads reveal"><div><span class="kw">What We Offer</span><h2 style="margin-top:.6rem">${J(id('treatments').heading)}</h2></div><a class="btn teal" href="${BOOK}" target="_blank" rel="noopener">Book a Visit</a></div>
+    <div class="tlist">${m.treatments.map((t,i)=>`<div class="trow reveal"><div class="idx">0${i+1}</div><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="go" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div>`).join('')}</div>
+    <div class="tthumbs reveal">${m.treatments.slice(0,4).map(t=>`<img src="../../${t.image}" alt="${J(t.name)}" loading="lazy">`).join('')}</div>
+  </div></section>
+
+  <section class="steps" id="process"><div class="wrap reveal">
+    <span class="kw">Simple Process</span><h2 style="margin-top:.6rem">${J(steps.heading)}</h2><p style="color:#c9c3d0;max-width:40rem">${J(steps.intro)}</p>
+    <div class="sgrid">${steps.steps.map(s=>`<div class="s"><div class="n">${J(s.num)} —</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div id="qbox" class="quote-big reveal"></div>
+    <div class="qdots reveal" id="qdots"></div>
+  </div></section>
+
+  <section class="final"><div class="narrow reveal">
+    <span class="kw" style="display:flex;justify-content:center">${J(m.site.tagline)}</span>
+    <h2 style="margin-top:1rem">${J(id('final-cta').heading)}</h2>
+    <a class="btn" href="${BOOK}" target="_blank" rel="noopener">${J(id('final-cta').cta)}</a>
+  </div></section>
+
+  <footer id="contact"><div class="wrap">
+    <div class="cols">
+      <div><img src="../../assets/logo/Optimal-Joy-Logo-WHITE.svg" alt="${J(m.site.name)}"><p>${J(m.footer.description)}</p>
+        <div class="soc">${m.social.map(s=>`<a href="${s.url}" target="_blank" rel="noopener" title="${J(s.platform)}">${s.platform[0]}</a>`).join('')}</div></div>
+      <div><h4>Visit</h4><p>${J(m.contact.address.street)}<br>${J(m.contact.address.city)}, ${J(m.contact.address.state)} ${J(m.contact.address.zip)}</p><p style="margin-top:10px">${J(m.contact.hours)}</p></div>
+      <div><h4>Contact</h4><p><strong>${J(m.contact.phone)}</strong> (${J(m.contact.phoneNote)})</p><p><a href="mailto:${m.contact.email}">${J(m.contact.email)}</a></p></div>
+    </div>
+    <div class="fb"><div>&copy; ${J(m.meta.generated.slice(0,4))} ${J(m.site.name)} · ${m.footer.legal.map(l=>`<a href="${SITE}${l.path}" target="_blank" rel="noopener">${J(l.label)}</a>`).join(' · ')}</div><div>Concept: Élan</div></div>
+  </div></footer>`;
+
+  // testimonial rotator
+  const qs=m.testimonials;let qi=0;
+  const qbox=document.getElementById('qbox'),qdots=document.getElementById('qdots');
+  qdots.innerHTML=qs.map((_,i)=>`<button data-i="${i}" class="${i===0?'on':''}"></button>`).join('');
+  function showQ(i){qi=i;const q=qs[i];qbox.innerHTML=`<div style="color:var(--bronze);letter-spacing:4px;margin-bottom:18px">${'★'.repeat(q.rating||5)}</div><p>&ldquo;${J(q.quote)}&rdquo;</p><div class="who">— ${J(q.name)}</div>`;qdots.querySelectorAll('button').forEach((b,bi)=>b.classList.toggle('on',bi===i));}
+  qdots.querySelectorAll('button').forEach(b=>b.onclick=()=>showQ(+b.dataset.i));
+  showQ(0);setInterval(()=>showQ((qi+1)%qs.length),6000);
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+</script>
+</body>
+</html>

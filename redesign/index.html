@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OptimalJoy — Design Concepts</title>
+<meta name="description" content="Three website design concepts for OptimalJoy Wellness & Aesthetics."/>
+<link rel="icon" href="../assets/logo/Optimal-Joy-Logo.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bronze:#C4926b;--teal:#38C5B5;--teal-d:#2DA194;--cream:#fbf7f2;--ink:#221a33;--text:#5f5868;--muted:#9b94a6;--line:#ece2d8;--serif:'Fraunces',serif;--sans:'Plus Jakarta Sans',sans-serif;--sh:0 24px 60px rgba(34,26,51,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+.top{text-align:center;padding:70px 0 30px}
+.top img{height:60px;margin:0 auto 26px}
+.top .kw{text-transform:uppercase;letter-spacing:.24em;font-size:.74rem;font-weight:700;color:var(--bronze)}
+.top h1{font-family:var(--serif);font-weight:500;color:var(--ink);font-size:clamp(2.4rem,5vw,3.6rem);margin:.6rem 0}
+.top h1 .it{font-style:italic}
+.top p{max-width:40rem;margin:0 auto;font-size:1.08rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:40px 0 90px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-8px);box-shadow:var(--sh)}
+.swatch{height:150px;display:flex;align-items:flex-end;padding:18px;position:relative;overflow:hidden}
+.swatch .tag{font-family:var(--serif);font-style:italic;color:#fff;font-size:1.5rem;position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.s1{background:linear-gradient(135deg,#f6e7da,#C4926b 70%,#38C5B5)}
+.s2{background:linear-gradient(135deg,#fdfbf8,#211c26 65%);}
+.s3{background:linear-gradient(180deg,#dff0ee,#2DA194 80%)}
+.card .bd{padding:26px;display:flex;flex-direction:column;flex:1}
+.card .n{font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:700}
+.card h2{font-family:var(--serif);font-weight:500;color:var(--ink);font-size:1.7rem;margin:6px 0 8px}
+.card p{font-size:.95rem;margin-bottom:20px}
+.card .dots{display:flex;gap:8px;margin-bottom:22px}
+.card .dots i{width:20px;height:20px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.card .btn{margin-top:auto;display:inline-flex;justify-content:center;background:var(--ink);color:#fff;font-weight:600;padding:.85rem 1.4rem;border-radius:100px;transition:.25s}
+.card .btn:hover{background:var(--bronze)}
+.note{text-align:center;padding:0 0 70px;color:var(--muted);font-size:.9rem}
+.note a{color:var(--bronze);font-weight:600}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <img src="../assets/logo/Optimal-Joy-Logo.svg" alt="OptimalJoy">
+    <span class="kw">Website Refresh · Design Concepts</span>
+    <h1>Three directions, <span class="it">one OptimalJoy.</span></h1>
+    <p>Each concept is fully interactive and shares the same content, bronze &amp; teal brand colors, and logo — they differ only in mood, layout, and typography. Open any to explore; use the switcher in the corner to hop between them.</p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="swatch s1"><span class="tag">Aurora</span></div>
+      <div class="bd"><span class="n">Concept 1</span><h2>Aurora</h2>
+        <p>Soft, luxe and airy. Elegant serif headings, blush gradients, and rounded organic shapes — warm and calming.</p>
+        <div class="dots"><i style="background:#C4926b"></i><i style="background:#38C5B5"></i><i style="background:#f6e7da"></i><i style="background:#1a1230"></i></div>
+        <a class="btn" href="./aurora/">View Aurora →</a></div>
+    </div>
+    <div class="card">
+      <div class="swatch s2"><span class="tag">Élan</span></div>
+      <div class="bd"><span class="n">Concept 2</span><h2>Élan</h2>
+        <p>Editorial and chic. Magazine whitespace, big Playfair display type, and clean lines — refined and confident.</p>
+        <div class="dots"><i style="background:#C4926b"></i><i style="background:#2DA194"></i><i style="background:#f4ece2"></i><i style="background:#211c26"></i></div>
+        <a class="btn" href="./elan/">View Élan →</a></div>
+    </div>
+    <div class="card">
+      <div class="swatch s3"><span class="tag">Summit</span></div>
+      <div class="bd"><span class="n">Concept 3</span><h2>Summit</h2>
+        <p>Inspired by the Smoky Mountains. Misty ridgelines, fresh dawn palette, and a modern rounded type — uplifting and happy.</p>
+        <div class="dots"><i style="background:#2DA194"></i><i style="background:#C4926b"></i><i style="background:#dff0ee"></i><i style="background:#1c2b29"></i></div>
+        <a class="btn" href="./summit/">View Summit →</a></div>
+    </div>
+  </div>
+  <div class="note">Baseline (current site) for reference: <a href="../">View current site →</a></div>
+</div>
+</body>
+</html>
