@@ -26,6 +26,7 @@ h1,h2,h3,h4{font-family:var(--serif);color:var(--ink);font-weight:500;line-heigh
 .serif-it{font-style:italic;font-weight:400}
 .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
 section{padding:104px 0;position:relative}
+[id]{scroll-margin-top:96px}
 .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.24em;font-size:.74rem;font-weight:700;color:var(--bronze)}
 .btn{font-family:var(--sans);display:inline-flex;align-items:center;gap:.5em;background:var(--ink);color:#fff;font-weight:600;padding:.95rem 1.9rem;border-radius:100px;border:none;cursor:pointer;transition:.25s;font-size:.96rem}
 .btn:hover{background:var(--bronze);transform:translateY(-3px);box-shadow:0 14px 30px rgba(196,146,107,.35)}
@@ -136,10 +137,23 @@ footer .soc a:hover{background:var(--bronze)}
 .switch a.on{background:var(--ink);color:#fff}
 
 @media(max-width:920px){
-  .links{display:none}.burger{display:block}
+  .burger{display:block}
+  .nav img{height:42px}
+  .nav .btn{margin-left:auto;padding:.7rem 1.1rem;font-size:.82rem;white-space:nowrap}
+  .links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:rgba(251,247,242,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:var(--sh);padding:8px 0;display:none}
+  header.nav-open .links{display:flex}
+  .links a{padding:15px 28px;font-size:1.06rem;border-bottom:1px solid var(--line)}
+  .links a:last-child{border-bottom:none}
+  .links a::after{display:none}
   .hero .grid,.pract,.feat,.vp,.tgrid,.stp,.tst,footer .cols{grid-template-columns:1fr}
   .pract img{order:-1}.chip.tl{left:8px}.chip.br{right:8px}
   section{padding:72px 0}.band,.steps-w,.final{margin:0 14px}
+}
+@media(max-width:560px){
+  .wrap{padding:0 20px}.hero h1{font-size:2.4rem}
+  .nav img{height:36px}.nav .btn{padding:.58rem .85rem;font-size:.76rem}
+  .chip{padding:10px 12px}.chip b{font-size:1.15rem}.chip span{font-size:.7rem}
+  .hero-media .main{border-radius:90px 90px 24px 24px}
 }
 </style>
 </head>
@@ -151,6 +165,8 @@ footer .soc a:hover{background:var(--bronze)}
 const J=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const BOOK="https://www.optimantra.com/optimus/om/patient/login";
 const SITE="https://www.optimaljoylife.com";
+function toggleNav(btn){const h=document.querySelector('header');const open=h.classList.toggle('nav-open');if(btn)btn.innerHTML=open?'✕':'☰';}
+function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';}
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
   const hs=m.homepage.sections, id=x=>hs.find(s=>s.id===x);
@@ -161,7 +177,7 @@ function render(m){
     <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
     <nav class="links"><a href="#treatments">Treatments</a><a href="#about">Meet Traci</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
     <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
-    <button class="burger" onclick="document.querySelector('.links').style.display='flex'">&#9776;</button>
+    <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
   <a id="top"></a>
 
@@ -211,7 +227,7 @@ function render(m){
     <div class="tgrid">${m.treatments.map((t,i)=>`<div class="t reveal" style="transition-delay:${(i%3)*80}ms"><div class="im"><img src="../../${t.image}" alt="${J(t.name)}" loading="lazy"></div><div class="bd"><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="lk" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div></div>`).join('')}</div>
   </div></section>
 
-  <section class="steps-w"><div class="wrap" style="padding:84px 0">
+  <section class="steps-w" id="process"><div class="wrap" style="padding:84px 0">
     <div class="intro reveal"><span class="eyebrow">${J(steps.intro?'Simple Process':'')}</span><h2 style="margin-top:.4rem">${J(steps.heading)}</h2><p style="color:#cfc6dc">${J(steps.intro)}</p></div>
     <div class="stp">${steps.steps.map(s=>`<div class="s reveal"><div class="n">${J(s.num)}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
   </div></section>
@@ -238,6 +254,7 @@ function render(m){
   </div></footer>`;
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
 }
 </script>
 </body>
