@@ -1,0 +1,7 @@
+# Local dev-only static server (not part of the site)
+_dev-server.js
+# Local editor/preview config
+.claude/
+node_modules/
+.DS_Store
+Thumbs.db

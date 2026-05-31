@@ -1,0 +1,210 @@
+{
+  "$schema": "./manifest.schema.json",
+  "meta": {
+    "manifestVersion": "1.0.0",
+    "generated": "2026-05-31",
+    "purpose": "Portable asset + content registry remapped from the live OptimalJoy site. System of record for the planned refresh. Designed to port cleanly into a database (each top-level array is a table; 'id' is the primary key).",
+    "captureNote": "Baseline capture of the EXISTING site as-is. No redesign applied. Copy quoted verbatim from the live homepage."
+  },
+  "site": {
+    "name": "OptimalJoy Wellness & Aesthetics",
+    "shortName": "OptimalJoy",
+    "tagline": "Welcome To OptimalJoy",
+    "domain": "optimaljoylife.com",
+    "sourceUrl": "https://www.optimaljoylife.com",
+    "platform": "WordPress",
+    "originalDesignCredit": "IL Webdesign",
+    "business": {
+      "category": "Wellness & Aesthetics Med Spa",
+      "services": ["Medical Weight Loss", "Hormone Replacement Therapy", "Facial Aesthetics", "Dermal Fillers", "Neurotoxin", "Microneedling", "Chemical Peels", "Liquid Lipo"],
+      "city": "Maryville",
+      "state": "TN",
+      "hours": "By Appointment Only"
+    },
+    "externalSystems": {
+      "patientPortal": "https://www.optimantra.com/optimus/om/patient/login",
+      "booking": "OptiMantra (optimantra.com)",
+      "financing": "Cherry Payment Plan"
+    }
+  },
+  "brand": {
+    "colors": [
+      { "id": "primary",        "name": "Bronze",      "hex": "#C4926b", "role": "Primary accent (buttons, headings, links)" },
+      { "id": "primary-dark",   "name": "Bronze Dark", "hex": "#af815d", "role": "Primary hover / depth" },
+      { "id": "secondary",      "name": "Teal",        "hex": "#38C5B5", "role": "Secondary accent" },
+      { "id": "secondary-dark", "name": "Teal Dark",   "hex": "#2DA194", "role": "Secondary hover" },
+      { "id": "gold",           "name": "Gold",        "hex": "#f2af29", "role": "Highlight / rating stars" },
+      { "id": "ink",            "name": "Deep Plum",   "hex": "#1a1230", "role": "Dark sections / footer" },
+      { "id": "ink-2",          "name": "Plum Black",  "hex": "#110c1d", "role": "Darkest backgrounds" },
+      { "id": "text",           "name": "Body Gray",   "hex": "#666666", "role": "Body copy" },
+      { "id": "muted",          "name": "Muted Gray",  "hex": "#ADB5B7", "role": "Muted text / borders" },
+      { "id": "white",          "name": "White",       "hex": "#ffffff", "role": "Backgrounds / reversed text" }
+    ],
+    "fonts": [
+      { "id": "primary",   "family": "Plus Jakarta Sans", "source": "Google Fonts", "usage": "Headings + body" },
+      { "id": "secondary", "family": "Roboto",            "source": "Google Fonts", "usage": "UI / fallback" }
+    ],
+    "logos": [
+      { "id": "logo-color", "label": "Primary logo",      "localPath": "assets/logo/Optimal-Joy-Logo.svg",       "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2022/06/Optimal-Joy-Logo.svg" },
+      { "id": "logo-white", "label": "White logo (dark bg)", "localPath": "assets/logo/Optimal-Joy-Logo-WHITE.svg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2022/06/Optimal-Joy-Logo-WHITE.svg" }
+    ]
+  },
+  "contact": {
+    "phone": "(865) 855-5441",
+    "phoneNote": "Text ONLY",
+    "email": "info@optimaljoylife.com",
+    "address": { "street": "921 Foch St", "city": "Maryville", "state": "TN", "zip": "37801" },
+    "hours": "By Appointment Only"
+  },
+  "social": [
+    { "id": "facebook",  "platform": "Facebook",  "url": "https://www.facebook.com/profile.php?id=100077419494058" },
+    { "id": "instagram", "platform": "Instagram", "url": "https://www.instagram.com/optimaljoy.traci/" }
+  ],
+  "navigation": [
+    { "id": "home", "label": "Home", "path": "/" },
+    { "id": "services", "label": "Services", "path": null, "children": [
+      { "label": "Hormone Replacement Therapy", "path": "/hormone-replacement-therapy/" },
+      { "label": "Medical Weight Loss", "path": "/prescription-weight-loss/" },
+      { "label": "Dermal Fillers / Lips", "path": "/dermal-fillers-lips/" },
+      { "label": "Medical Grade Chemical Peel", "path": "/medical-grade-chemical-peel/" },
+      { "label": "Microneedling w/ RF", "path": "/microneedling-with-rf/" },
+      { "label": "Liquid Lipo", "path": "/liquid-lipo/" },
+      { "label": "Neurotoxin Treatment", "path": "/neurotoxin-treatment/" }
+    ]},
+    { "id": "patient-resources", "label": "Patient Resources", "path": null, "children": [
+      { "label": "Patient Portal", "path": "https://www.optimantra.com/optimus/om/patient/login", "external": true },
+      { "label": "Medication Refill Form", "path": "/medication-refill-form/" },
+      { "label": "Hormone Replacement Therapy Interest Form", "path": "/hormone-replacement-therapy-interest-form/" },
+      { "label": "Current HRT Clients Medication Refill Form", "path": "/current-hrt-clients-medication-refill-form/" }
+    ]},
+    { "id": "payment-plans", "label": "Payment Plans", "path": null, "children": [
+      { "label": "Cherry Payment Plan", "path": "/cherry-payment-plan/" }
+    ]},
+    { "id": "about", "label": "About", "path": null, "children": [
+      { "label": "Pricing", "path": "/pricing/" },
+      { "label": "About Us", "path": "/about/" },
+      { "label": "Blogs", "path": "/blogs/" }
+    ]},
+    { "id": "contact", "label": "Contact", "path": "/contact/" },
+    { "id": "book", "label": "Book Appointment", "path": "booking", "cta": true }
+  ],
+  "pages": [
+    { "id": "home", "title": "Home", "path": "/", "type": "core", "captured": true },
+    { "id": "about", "title": "About Us", "path": "/about/", "type": "core", "captured": false },
+    { "id": "contact", "title": "Contact", "path": "/contact/", "type": "core", "captured": false },
+    { "id": "pricing", "title": "Pricing", "path": "/pricing/", "type": "core", "captured": false },
+    { "id": "our-pricing", "title": "Our Pricing", "path": "/our-pricing/", "type": "core", "captured": false },
+    { "id": "blogs", "title": "Blogs", "path": "/blogs/", "type": "core", "captured": false },
+    { "id": "faqs", "title": "FAQs", "path": "/faqs/", "type": "core", "captured": false },
+    { "id": "traci-carnette-np", "title": "Traci Carnette NP", "path": "/traci-carnette-np/", "type": "core", "captured": false },
+    { "id": "deals-and-promotions", "title": "Deals & Promotions", "path": "/deals-and-promotions/", "type": "core", "captured": false },
+    { "id": "cherry-payment-plan", "title": "Cherry Payment Plan", "path": "/cherry-payment-plan/", "type": "core", "captured": false },
+    { "id": "privacy-policy", "title": "Privacy Policy", "path": "/privacy-policy/", "type": "legal", "captured": false },
+    { "id": "terms-and-conditions", "title": "Terms & Conditions", "path": "/terms-and-conditions/", "type": "legal", "captured": false },
+
+    { "id": "hormone-replacement-therapy", "title": "Hormone Replacement Therapy", "path": "/hormone-replacement-therapy/", "type": "service", "captured": false },
+    { "id": "prescription-weight-loss", "title": "Medical Weight Loss", "path": "/prescription-weight-loss/", "type": "service", "captured": false },
+    { "id": "dermal-fillers-lips", "title": "Dermal Fillers / Lips", "path": "/dermal-fillers-lips/", "type": "service", "captured": false },
+    { "id": "medical-grade-chemical-peel", "title": "Medical Grade Chemical Peel", "path": "/medical-grade-chemical-peel/", "type": "service", "captured": false },
+    { "id": "microneedling-with-rf", "title": "Microneedling w/ RF", "path": "/microneedling-with-rf/", "type": "service", "captured": false },
+    { "id": "liquid-lipo", "title": "Liquid Lipo", "path": "/liquid-lipo/", "type": "service", "captured": false },
+    { "id": "neurotoxin-treatment", "title": "Neurotoxin Treatment", "path": "/neurotoxin-treatment/", "type": "service", "captured": false },
+    { "id": "toxin-treatment", "title": "Toxin Treatment", "path": "/toxin-treatment/", "type": "service", "captured": false },
+    { "id": "iv-therapy-vitamin-shots", "title": "IV Therapy / Vitamin Shots", "path": "/iv-therapy-vitamin-shots/", "type": "service", "captured": false },
+
+    { "id": "medication-refill-form", "title": "Medication Refill Form", "path": "/medication-refill-form/", "type": "form", "captured": false },
+    { "id": "hrt-interest-form", "title": "HRT Interest Form", "path": "/hormone-replacement-therapy-interest-form/", "type": "form", "captured": false },
+    { "id": "current-hrt-refill-form", "title": "Current HRT Clients Medication Refill Form", "path": "/current-hrt-clients-medication-refill-form/", "type": "form", "captured": false },
+
+    { "id": "dermal-fillers-in-alcoa-tn", "title": "Dermal Fillers in Alcoa TN", "path": "/dermal-fillers-in-alcoa-tn/", "type": "landing-seo", "captured": false },
+    { "id": "facial-fillers-in-maryville-tn", "title": "Facial Fillers in Maryville TN", "path": "/facial-fillers-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "dermal-fillers-in-maryville-tn-2025", "title": "Dermal Fillers in Maryville TN 2025", "path": "/dermal-fillers-in-maryville-tn-2025/", "type": "landing-seo", "captured": false },
+    { "id": "lip-fillers-in-maryville-tn", "title": "Lip Fillers in Maryville TN", "path": "/lip-fillers-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "hrt-in-maryville-tn", "title": "HRT in Maryville TN", "path": "/hrt-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "hrt-for-hot-flashes-in-maryville-tn", "title": "HRT for Hot Flashes in Maryville TN", "path": "/hrt-for-hot-flashes-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "hrt-for-low-libido-in-maryville-tn", "title": "HRT for Low Libido in Maryville TN", "path": "/hrt-for-low-libido-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "hrt-for-mood-swings-in-maryville-tn", "title": "HRT for Mood Swings in Maryville TN", "path": "/hrt-for-mood-swings-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "hrt-for-weight-gain-in-maryville-tn", "title": "HRT for Weight Gain in Maryville TN", "path": "/hrt-for-weight-gain-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "medical-glp-1-weight-loss-in-maryville-tn", "title": "Medical GLP-1 Weight Loss in Maryville TN", "path": "/medical-glp-1-weight-loss-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "medical-grade-chemical-peels-in-maryville-tn", "title": "Medical Grade Chemical Peels in Maryville TN", "path": "/medical-grade-chemical-peels-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "medical-weight-loss-in-alcoa-tn", "title": "Medical Weight Loss in Alcoa TN", "path": "/medical-weight-loss-in-alcoa-tn/", "type": "landing-seo", "captured": false },
+    { "id": "medical-weight-loss-in-maryville-tn", "title": "Medical Weight Loss in Maryville TN", "path": "/medical-weight-loss-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "rf-microneedling-in-maryville-tn", "title": "RF Microneedling in Maryville TN", "path": "/rf-microneedling-in-maryville-tn/", "type": "landing-seo", "captured": false },
+    { "id": "botox-maryville-tn", "title": "Botox Maryville TN", "path": "/botox-maryville-tn/", "type": "landing-seo", "captured": false }
+  ],
+  "treatments": [
+    { "id": "hrt", "name": "Hormone Replacement Therapy", "path": "/hormone-replacement-therapy/", "image": "assets/images/treatment-hrt.jpg",
+      "blurb": "Our personalized Hormone Replacement Therapy is designed for both men and women, addressing hormone imbalances, improving energy levels, enhancing mental clarity, and supporting weight management to promote overall well-being." },
+    { "id": "weight-loss", "name": "Prescription Weight Loss", "path": "/prescription-weight-loss/", "image": "assets/images/treatment-weight-loss.jpg",
+      "blurb": "Prescription weight loss offers a comprehensive approach to shedding pounds and enhancing health. By targeting your brain's appetite centers, our treatments help curb cravings for high-calorie foods and promote a feeling of fullness and healthy weight loss." },
+    { "id": "dermal-fillers", "name": "Dermal Fillers / Lips", "path": "/dermal-fillers-lips/", "image": "assets/images/treatment-dermal-fillers.jpg",
+      "blurb": "Unlock a youthful, vibrant look with our comprehensive dermal filler and lip augmentation services at OptimalJoy. We're here to help you embrace your natural beauty and boost your confidence, ensuring you look and feel your best at every moment." },
+    { "id": "chemical-peel", "name": "Medical Grade Chemical Peel", "path": "/medical-grade-chemical-peel/", "image": "assets/images/treatment-chemical-peel.jpg",
+      "blurb": "Our line of medical-grade chemical peels is specially formulated with glutathione, a powerful antioxidant known for its skin rejuvenating properties. Glutathione works at the cellular level to protect the skin from oxidative damage, a key factor in premature skin aging." },
+    { "id": "microneedling", "name": "Microneedling with RF", "path": "/microneedling-with-rf/", "image": "assets/images/treatment-microneedling.png",
+      "blurb": "Microneedling with RF is a state-of-the-art aesthetic treatment that aims to stimulate the body's natural healing processes to improve the appearance of the skin. It involves the use of fine needles to create micro-injuries in the skin, prompting the production of collagen and elastin." },
+    { "id": "liquid-lipo", "name": "Liquid Lipo", "path": "/liquid-lipo/", "image": "assets/images/treatment-liquid-lipo.jpg",
+      "blurb": "Liquid Lipo is a cutting-edge, non-surgical treatment designed to dissolve fat and contour the body without the need for invasive procedures. Utilizing a specialized solution injected directly into the fat tissue, it effectively breaks down fat cells, resulting in a slimmer, more defined appearance with minimal downtime." },
+    { "id": "neurotoxin", "name": "Neurotoxin Treatment", "path": "/neurotoxin-treatment/", "image": "assets/images/treatment-neurotoxin.jpg",
+      "blurb": "Xeomin offers a refined approach to smoothing fine lines and wrinkles, providing patients with a rejuvenated, natural-looking appearance. This highly purified neurotoxin specifically targets muscle contractions that cause facial lines, enhancing your natural beauty without altering your expressions." }
+  ],
+  "homepage": {
+    "sections": [
+      { "id": "hero", "order": 1, "type": "hero", "heading": "OptimalJoy Wellness & Aesthetics", "tagline": "Welcome To OptimalJoy", "cta": "Book Appointment" },
+      { "id": "feature-slides", "order": 2, "type": "feature-carousel", "slides": [
+        { "title": "Shape & Define", "body": "Our dermal fillers artfully enhance a woman's beauty, bestowing her lips with a voluptuous allure that feels as captivating as it looks." },
+        { "title": "Lose Weight Fast", "body": "Our prescription weight loss program combines appetite control, hormone regulation, and enhanced fat utilization to promote steady, satisfying weight loss." },
+        { "title": "Reduce Wrinkles", "body": "Our Xeomin injections unveils your radiant, youthful complexion by expertly smoothing away wrinkles for a beautifully refreshed and natural look." }
+      ]},
+      { "id": "welcome", "order": 3, "type": "intro", "heading": "Welcome To OptimalJoy Wellness & Aesthetics",
+        "body": "Welcome to OptimalJoy, where we break away from the cycle of costly and ineffective health and beauty treatments. Our mission is to provide you with safe, effective solutions in weight loss, facial aesthetics, and overall health, all designed to help you uncover and embrace your most beautiful self." },
+      { "id": "value-props", "order": 4, "type": "three-column", "items": [
+        { "title": "Affordable Care", "body": "At OptimalJoy, we're dedicated to offering care that's not only effective but also affordable, ensuring beauty and health are accessible to everyone." },
+        { "title": "Professional Team", "body": "Our practitioners bring years of experience to the table, offering expert care that ensures you get the highest quality beauty and health services." },
+        { "title": "Real Results", "body": "We pride ourselves on delivering services that go beyond expectations, offering real results that are not only visible but deeply appreciated by our clients." }
+      ]},
+      { "id": "practitioner", "order": 5, "type": "profile", "eyebrow": "Introducing our Elite Practitioner", "name": "Traci Carnette MSN, FNP-C", "image": "assets/images/practitioner-traci.jpg",
+        "body": "Meet Traci Carnette, the heart and expertise behind OptimalJoy Wellness & Aesthetics. With a rich background in nursing and a passion for enhancing beauty and wellness, Traci brings a unique blend of care, precision, and a desire to uplift every client. Discover the difference with Traci's touch and embark on a journey to radiant health and confidence." },
+      { "id": "treatments", "order": 6, "type": "treatment-grid", "heading": "Our Treatments", "ref": "treatments" },
+      { "id": "steps", "order": 7, "type": "process", "heading": "3 Easy Steps To Get Started", "intro": "Booking an appointment with us has never been easier. Follow our super simple 3 step process.", "steps": [
+        { "num": "01", "title": "Choose a Treatment", "body": "Browse our carefully curated selection of treatments to find one that best suits your individual aesthetic needs." },
+        { "num": "02", "title": "Book Appointment", "body": "Secure your spot by scheduling an appointment with us, easily done through our online booking platform." },
+        { "num": "03", "title": "Enjoy The Results", "body": "Enjoy the transformative results, witnessing the remarkable improvement in your beauty and wellness." }
+      ]},
+      { "id": "testimonials", "order": 8, "type": "testimonials", "heading": "Our Clients", "subheading": "Here's what our satisfied clients are saying", "ref": "testimonials" },
+      { "id": "final-cta", "order": 9, "type": "cta", "heading": "Take Your Beauty To The Next Level", "cta": "Book Appointment" },
+      { "id": "deals-modal", "order": 10, "type": "modal", "heading": "Don't Miss Out!", "subheading": "Deals & Promotions", "image": "assets/images/deals-promotions.jpg",
+        "body": "Get ready for amazing deals at OptimalJoy Wellness & Aesthetics! Our specials are constantly changing, so seize the opportunity to grab them while they last!",
+        "bullets": ["Buy 1 get 2nd 50% off Deals.", "Access to ever-changing exclusive specials."],
+        "cta": "Check Out Our Specials", "dismiss": "No thanks, I'm not interested!" }
+    ]
+  },
+  "testimonials": [
+    { "id": "emma-richardson", "name": "Emma Richardson", "rating": 5,
+      "quote": "After trying various weight loss methods without success, I turned to OptimalJoy's Prescription Weight Loss Program, and it's been a game-changer. The personalized approach and ongoing support have helped me achieve and maintain my weight loss goals in a healthy, sustainable way. I feel like a new person, both inside and out. Thank you, OptimalJoy, for helping me regain my confidence and health!" },
+    { "id": "michael-thompson", "name": "Michael Thompson", "rating": 5,
+      "quote": "I've always been skeptical about beauty treatments, but the Radio Frequency Microneedling service at OptimalJoy changed my perspective. The professionalism and expertise of the practitioners made me feel at ease, and the results were beyond my expectations. My skin has never looked so vibrant, youthful, and smooth. I'm truly amazed at the transformation and can't recommend OptimalJoy enough. They've earned a customer for life!" }
+  ],
+  "footer": {
+    "description": "Our practice is dedicated to enhancing your natural beauty and promoting overall wellness through personalized, expert care in a welcoming and supportive environment.",
+    "legal": [
+      { "label": "Privacy Policy", "path": "/privacy-policy/" },
+      { "label": "Terms & Conditions", "path": "/terms-and-conditions/" }
+    ],
+    "designCredit": "Website Designed by IL Webdesign"
+  },
+  "assets": [
+    { "id": "logo-color", "type": "logo", "localPath": "assets/logo/Optimal-Joy-Logo.svg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2022/06/Optimal-Joy-Logo.svg" },
+    { "id": "logo-white", "type": "logo", "localPath": "assets/logo/Optimal-Joy-Logo-WHITE.svg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2022/06/Optimal-Joy-Logo-WHITE.svg" },
+    { "id": "img-introduction", "type": "image", "localPath": "assets/images/introduction-image.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Introduction-Image.jpg" },
+    { "id": "img-treatment-hrt", "type": "image", "localPath": "assets/images/treatment-hrt.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/12/Untitled-10-7.jpg" },
+    { "id": "img-treatment-weight-loss", "type": "image", "localPath": "assets/images/treatment-weight-loss.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Untitled-15-1.jpg" },
+    { "id": "img-treatment-dermal-fillers", "type": "image", "localPath": "assets/images/treatment-dermal-fillers.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2022/06/Dermal-Fillers.jpg" },
+    { "id": "img-treatment-chemical-peel", "type": "image", "localPath": "assets/images/treatment-chemical-peel.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Medical-Grade-Chemical-Peel.jpg" },
+    { "id": "img-treatment-microneedling", "type": "image", "localPath": "assets/images/treatment-microneedling.png", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/04/Untitled-1-7.png" },
+    { "id": "img-treatment-liquid-lipo", "type": "image", "localPath": "assets/images/treatment-liquid-lipo.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Liquid-Lipo-1.jpg" },
+    { "id": "img-treatment-neurotoxin", "type": "image", "localPath": "assets/images/treatment-neurotoxin.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Xeomin.jpg" },
+    { "id": "img-practitioner-traci", "type": "image", "localPath": "assets/images/practitioner-traci.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2024/03/Untitled-10-1-2.jpg" },
+    { "id": "img-deals-promotions", "type": "image", "localPath": "assets/images/deals-promotions.jpg", "sourceUrl": "https://optimaljoylife.com/wp-content/uploads/2026/05/Deals-Promotions-OptimalJoy-Maryville-TN.jpg" }
+  ]
+}
