@@ -16,6 +16,7 @@
   --text:#5f5868; --muted:#9b94a6; --line:#ece2d8; --white:#fff;
   --serif:'Fraunces',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
   --r:24px; --sh:0 24px 60px rgba(34,26,51,.10);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -35,8 +36,27 @@ section{padding:104px 0;position:relative}
 .reveal{opacity:0;transform:translateY(34px);transition:.8s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
 
+/* --- depth & motion --- */
+body::after{content:"";position:fixed;inset:0;background:var(--grain);background-size:170px;opacity:.045;pointer-events:none;z-index:9999;mix-blend-mode:multiply}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(26px,-24px) scale(1.07)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shimmer{0%,100%{opacity:.5}50%{opacity:.85}}
+.hero-media::before{content:"";position:absolute;inset:-30px;border-radius:46% 54% 50% 50%;background:conic-gradient(from 0deg,var(--bronze),var(--teal),var(--blush),var(--bronze));filter:blur(38px);opacity:.32;z-index:0;animation:spin 26s linear infinite}
+.hero-media .main,.hero-media .chip{position:relative;z-index:2}
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,var(--cream),#fff,var(--cream));padding:20px 0}
+.marquee .track{display:flex;gap:54px;width:max-content;animation:mq 30s linear infinite}
+.marquee .track span{font-family:var(--serif);font-style:italic;font-size:1.55rem;color:var(--ink);opacity:.5;white-space:nowrap;display:flex;align-items:center;gap:54px}
+.marquee .track span::after{content:"✦";color:var(--bronze);font-style:normal;font-size:1rem}
+.final{position:relative;overflow:hidden}
+.final-bg{position:absolute;inset:-14% 0;z-index:0;background-size:cover;background-position:center;will-change:transform}
+.final::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(168,118,79,.93),rgba(45,161,148,.74))}
+.final .wrap{position:relative;z-index:2}
+.fcard,.t,.q{will-change:transform}
+.fcard:hover,.t:hover{box-shadow:0 30px 70px rgba(34,26,51,.16)}
+
 /* blobs */
-.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite;will-change:transform}
 
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(251,247,242,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
@@ -192,6 +212,10 @@ function toggleNav(btn){const h=document.querySelector('header');const open=h.cl
 function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';document.querySelectorAll('.navitem.open').forEach(n=>n.classList.remove('open'));}
 function toggleSub(btn){btn.closest('.navitem').classList.toggle('open');}
 function scrollTreat(btn,dir){const car=btn.closest('.tcar-wrap').querySelector('.tcar');const c=car.querySelector('.t');const step=c?c.getBoundingClientRect().width+22:290;car.scrollBy({left:dir*step,behavior:'smooth'});}
+let pxEls=[];
+function parallax(){const vh=window.innerHeight;for(const el of pxEls){const p=el.parentElement.getBoundingClientRect();const off=(p.top+p.height/2)-vh/2;el.style.transform='translate3d(0,'+(off*(parseFloat(el.dataset.px)||0))+'px,0)';}}
+window.addEventListener('scroll',()=>requestAnimationFrame(parallax),{passive:true});
+window.addEventListener('resize',()=>requestAnimationFrame(parallax),{passive:true});
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
   const hs=m.homepage.sections, id=x=>hs.find(s=>s.id===x);
@@ -206,8 +230,9 @@ function render(m){
   </div></header>
   <a id="top"></a>
 
-  <section class="hero"><div class="blob" style="width:520px;height:520px;background:var(--blush);top:-120px;right:-120px"></div>
-  <div class="blob" style="width:420px;height:420px;background:#d8f3ee;bottom:-160px;left:-140px"></div>
+  <section class="hero"><div class="blob" style="width:520px;height:520px;background:var(--blush);top:-120px;right:-120px;animation-delay:-2s"></div>
+  <div class="blob" style="width:420px;height:420px;background:#d8f3ee;bottom:-160px;left:-140px;animation-delay:-9s"></div>
+  <div class="blob" style="width:280px;height:280px;background:#f3d6c2;top:46%;left:56%;opacity:.38;animation-delay:-5s"></div>
   <div class="wrap grid">
     <div class="reveal">
       <span class="eyebrow">${J(id('hero').tagline)}</span>
@@ -225,7 +250,9 @@ function render(m){
     </div>
   </div></section>
 
-  <section style="padding-top:30px"><div class="wrap">
+  <div class="marquee"><div class="track">${['Wellness','Aesthetics','Renewal','Confidence','Radiance','Wellness','Aesthetics','Renewal','Confidence','Radiance'].map(w=>`<span>${w}</span>`).join('')}</div></div>
+
+  <section style="padding-top:54px"><div class="wrap">
     <div class="feat">${slides.map((s,i)=>`<div class="fcard reveal" style="transition-delay:${i*90}ms"><div class="ic">${['✦','◆','❋'][i]||'✦'}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
   </div></section>
 
@@ -263,10 +290,10 @@ function render(m){
     <div class="tst">${m.testimonials.map(q=>`<div class="q reveal"><div class="mk">&ldquo;</div><div class="stars">${'★'.repeat(q.rating||5)}</div><p>${J(q.quote)}</p><div class="who">${J(q.name)}</div></div>`).join('')}</div>
   </div></section>
 
-  <section class="final"><div class="wrap reveal">
-    <span class="eyebrow">${J(m.site.tagline)}</span>
-    <h2 style="margin-top:.6rem">${J(id('final-cta').heading)}</h2>
-    <a class="btn" href="${BOOK}" target="_blank" rel="noopener">${J(id('final-cta').cta)} →</a>
+  <section class="final"><div class="final-bg" data-px="0.14" style="background-image:url(../../assets/images/introduction-image.jpg)"></div><div class="wrap reveal">
+    <span class="eyebrow" style="color:#fff">${J(m.site.tagline)}</span>
+    <h2 style="margin-top:.6rem;color:#fff">${J(id('final-cta').heading)}</h2>
+    <a class="btn light" href="${BOOK}" target="_blank" rel="noopener">${J(id('final-cta').cta)} →</a>
   </div></section>
 
   <footer id="contact"><div class="wrap">
@@ -281,6 +308,7 @@ function render(m){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
+  pxEls=[...document.querySelectorAll('[data-px]')];parallax();
 }
 </script>
 </body>

@@ -42,6 +42,19 @@ section{padding:104px 0;position:relative}
 .reveal.in{opacity:1;transform:none}
 .ic svg{width:30px;height:30px;stroke-width:1.6}
 
+/* --- depth & motion --- */
+@keyframes glowpulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.85;transform:scale(1.16)}}
+@keyframes rise{0%{transform:translateY(0);opacity:0}12%{opacity:.85}100%{transform:translateY(-240px);opacity:0}}
+.hero .glow{position:absolute;top:-70px;right:6%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(214,162,63,.55),transparent 62%);filter:blur(18px);z-index:1;pointer-events:none;animation:glowpulse 6.5s ease-in-out infinite}
+.hero .embers{position:absolute;inset:0;overflow:hidden;z-index:1;pointer-events:none}
+.ember{position:absolute;bottom:140px;width:7px;height:7px;border-radius:50%;background:var(--gold-b);filter:blur(.5px);opacity:0;animation:rise linear infinite}
+.hero-photo .frame img{height:112%;will-change:transform}
+.trail-bg,.final-bg{position:absolute;inset:-14% 0;background-size:cover;background-position:center;will-change:transform}
+.trail .trail-bg{z-index:0;opacity:.14;mix-blend-mode:luminosity}
+.final .final-bg{z-index:0;opacity:.5}
+.final::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(122,82,48,.84),rgba(43,30,16,.82))}
+.t,.fc,.q{will-change:transform}
+
 header{position:sticky;top:0;z-index:50;background:rgba(253,249,241,.85);backdrop-filter:blur(13px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:84px}
 .nav img{height:48px}
@@ -223,6 +236,10 @@ function toggleNav(btn){const h=document.querySelector('header');const open=h.cl
 function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';document.querySelectorAll('.navitem.open').forEach(n=>n.classList.remove('open'));}
 function toggleSub(btn){btn.closest('.navitem').classList.toggle('open');}
 function scrollTreat(btn,dir){const car=btn.closest('.tcar-wrap').querySelector('.tcar');const c=car.querySelector('.t');const step=c?c.getBoundingClientRect().width+22:290;car.scrollBy({left:dir*step,behavior:'smooth'});}
+let pxEls=[];
+function parallax(){const vh=window.innerHeight;for(const el of pxEls){const p=el.parentElement.getBoundingClientRect();const off=(p.top+p.height/2)-vh/2;el.style.transform='translate3d(0,'+(off*(parseFloat(el.dataset.px)||0))+'px,0)';}}
+window.addEventListener('scroll',()=>requestAnimationFrame(parallax),{passive:true});
+window.addEventListener('resize',()=>requestAnimationFrame(parallax),{passive:true});
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
   const hs=m.homepage.sections,id=x=>hs.find(s=>s.id===x);
@@ -237,14 +254,14 @@ function render(m){
   </div></header>
   <a id="top"></a>
 
-  <section class="hero grain"><div class="wrap inner">
+  <section class="hero grain"><div class="glow"></div><div class="embers">${[...Array(10)].map((_,i)=>`<span class="ember" style="left:${5+i*9}%;animation-duration:${7+(i%4)*2}s;animation-delay:${(i*0.7).toFixed(1)}s"></span>`).join('')}</div><div class="wrap inner">
     <div class="reveal">
       <span class="kw">Rooted in the foothills of the Smokies · ${J(m.contact.address.city)}, ${J(m.contact.address.state)}</span>
       <h1>Strength, beauty<br>&amp; <span class="gold">lasting</span> <span class="teal">renewal</span>.</h1>
       <p>${J(welcome.body)}</p>
       <div class="row"><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a><a class="btn ghost" href="#treatments">Explore Treatments</a></div>
     </div>
-    <div class="hero-photo reveal"><div class="frame"><img src="../../assets/images/introduction-image.jpg" alt="Radiant OptimalJoy client">
+    <div class="hero-photo reveal"><div class="frame"><img data-px="0.05" src="../../assets/images/introduction-image.jpg" alt="Radiant OptimalJoy client">
       <div class="tagchip"><b>Real care, real results.</b><br><span style="font-size:.85rem;color:#cdb89c">Wellness &amp; aesthetics for every you.</span></div>
     </div></div>
   </div>${RIDGE}</section>
@@ -274,7 +291,7 @@ function render(m){
       <div class="tcar">${m.treatments.map(t=>`<div class="t"><div class="im"><img src="../../${t.image}" alt="${J(t.name)}" loading="lazy"></div><div class="bd"><h3>${J(t.name)}</h3><p>${J(t.blurb)}</p><a class="lk" href="${SITE}${t.path}" target="_blank" rel="noopener">Learn more →</a></div></div>`).join('')}</div></div>
   </div></section>
 
-  <section class="trail grain" id="process"><div class="wrap">
+  <section class="trail grain" id="process"><div class="trail-bg" data-px="0.1" style="background-image:url(../../assets/images/treatment-microneedling.png)"></div><div class="wrap">
     <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">The Trailhead</span><h2 style="margin-top:.7rem">${J(steps.heading)}</h2><p style="margin-top:1.1rem">${J(steps.intro)}</p></div>
     <div class="sgrid">${steps.steps.map(s=>`<div class="s reveal"><div class="pin">${J(s.num)}</div><h3>${J(s.title)}</h3><p>${J(s.body)}</p></div>`).join('')}</div>
   </div></section>
@@ -284,7 +301,7 @@ function render(m){
     <div class="tst">${m.testimonials.map(q=>`<div class="q reveal"><div class="mk">&ldquo;</div><div class="stars">${'★'.repeat(q.rating||5)}</div><p>${J(q.quote)}</p><div class="who">— ${J(q.name)}</div></div>`).join('')}</div>
   </div></section>
 
-  <section class="final grain"><div class="wrap intro reveal">
+  <section class="final grain"><div class="final-bg" data-px="0.14" style="background-image:url(../../assets/images/treatment-dermal-fillers.jpg)"></div><div class="wrap intro reveal">
     <span class="kw" style="justify-content:center;display:inline-flex">${J(m.site.tagline)}</span>
     <h2 style="margin-top:.8rem">${J(id('final-cta').heading)}</h2>
     <a class="btn" style="margin-top:1.6rem" href="${BOOK}" target="_blank" rel="noopener">${J(id('final-cta').cta)}</a>
@@ -302,6 +319,7 @@ function render(m){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
+  pxEls=[...document.querySelectorAll('[data-px]')];parallax();
 }
 </script>
 </body>
