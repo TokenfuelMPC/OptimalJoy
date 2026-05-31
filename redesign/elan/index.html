@@ -45,6 +45,17 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,251,248,.85);backdro
 .links{display:flex;gap:38px;align-items:center}
 .links a{font-weight:600;font-size:.92rem;color:var(--ink)}
 .links a:hover{color:var(--bronze)}
+.navitem.has-sub{position:relative;display:flex;align-items:center}
+.subtoggle{background:none;border:none;cursor:pointer;font-family:var(--sans);font-weight:600;font-size:.92rem;color:var(--ink);display:inline-flex;align-items:center;gap:6px;padding:0}
+.subtoggle:hover{color:var(--bronze)}
+.caret{font-size:.6rem;transition:.25s}
+.navitem.open .caret{transform:rotate(180deg)}
+.submenu{display:none;position:absolute;top:calc(100% + 16px);left:0;min-width:244px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--sh);padding:8px;flex-direction:column;z-index:60}
+.navitem.open>.submenu{display:flex}
+.submenu a{padding:10px 14px;border-radius:6px;font-size:.88rem;color:var(--ink);white-space:nowrap;font-weight:500}
+.submenu a:hover{background:var(--sand);color:var(--bronze)}
+.submenu a.all{font-weight:700;color:var(--bronze)}
+@media(hover:hover) and (min-width:921px){.navitem.has-sub:hover>.submenu{display:flex}.navitem.has-sub:hover .caret{transform:rotate(180deg)}}
 .burger{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink)}
 
 /* hero editorial */
@@ -142,6 +153,10 @@ footer .soc a:hover{background:var(--bronze);border-color:var(--bronze)}
   header.nav-open .links{display:flex}
   .links a{padding:15px 30px;font-size:1.06rem;border-bottom:1px solid var(--line)}
   .links a:last-child{border-bottom:none}
+  .navitem.has-sub{display:block}
+  .subtoggle{width:100%;justify-content:space-between;padding:15px 30px;font-size:1.06rem;border-bottom:1px solid var(--line)}
+  .submenu{position:static;transform:none;box-shadow:none;border:none;border-radius:0;padding:0;background:var(--sand);min-width:0}
+  .submenu a{padding:13px 42px;font-size:.98rem;border-bottom:1px solid var(--line);white-space:normal}
   .split,.elist,.sgrid,footer .cols{grid-template-columns:1fr}
   .elist .e,.metarow .m{border-right:none;border-bottom:1px solid var(--line)}
   .tcar-ctrls{display:none}.t{flex-basis:260px}section{padding:74px 0}
@@ -161,7 +176,8 @@ footer .soc a:hover{background:var(--bronze);border-color:var(--bronze)}
 const J=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const BOOK="https://www.optimantra.com/optimus/om/patient/login";const SITE="https://www.optimaljoylife.com";
 function toggleNav(btn){const h=document.querySelector('header');const open=h.classList.toggle('nav-open');if(btn)btn.innerHTML=open?'✕':'☰';}
-function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';}
+function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';document.querySelectorAll('.navitem.open').forEach(n=>n.classList.remove('open'));}
+function toggleSub(btn){btn.closest('.navitem').classList.toggle('open');}
 function scrollTreat(btn,dir){const car=(btn.closest('.tcar-wrap')||btn.closest('section')).querySelector('.tcar');const c=car.querySelector('.t');const step=c?c.getBoundingClientRect().width+20:284;car.scrollBy({left:dir*step,behavior:'smooth'});}
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
@@ -171,7 +187,7 @@ function render(m){
   document.getElementById('app').innerHTML=`
   <header><div class="wrap nav">
     <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
-    <nav class="links"><a href="#treatments">Treatments</a><a href="#about">Practitioner</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
+    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="#treatments">All Treatments</a>${m.treatments.map(t=>`<a href="${SITE}${t.path}" target="_blank" rel="noopener">${J(t.name)}</a>`).join('')}</div></div><a href="#about">Practitioner</a><a href="#process">Process</a><a href="#contact">Contact</a></nav>
     <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
