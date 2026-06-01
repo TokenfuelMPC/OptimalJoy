@@ -22,7 +22,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.62;font-size:1.1rem;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.62;font-size:1.1rem;-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 h1,h2,h3,h4{font-family:var(--disp);color:var(--ink);font-weight:600;line-height:1.08;letter-spacing:0}
 .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
@@ -179,6 +179,15 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,249,241,.85);backdro
 .q .stars{color:var(--gold);letter-spacing:3px;margin-bottom:12px}
 .q p{font-size:1.04rem;line-height:1.55;color:var(--ink);font-family:var(--serif);font-style:italic}
 .q .who{font-family:var(--disp);font-weight:700;color:var(--clay);margin-top:16px}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:50px}
+.tm{text-align:center;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:38px 26px;transition:.3s}
+.tm:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:var(--bronze)}
+.tm .avatar{width:128px;height:128px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(150deg,var(--sand),var(--clay));display:grid;place-items:center;border:3px solid #fff;box-shadow:var(--sh)}
+.tm .avatar>svg{width:66px;height:66px;color:rgba(255,255,255,.92);margin-top:-6px}
+.tm-soon{font-family:var(--sans);font-style:italic;font-size:.86rem;color:var(--muted);margin-bottom:8px;letter-spacing:.02em}
+.tm h3{font-size:1.45rem;margin-bottom:3px;font-family:var(--disp);font-weight:600}
+.tm .role{font-family:var(--vintage);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--clay);font-weight:600;margin-bottom:12px}
+.tm p{font-size:1.02rem;color:var(--text)}
 
 /* FINAL */
 .final{background:linear-gradient(135deg,var(--clay),var(--bronze-d) 55%,#3c2a18);color:#fff;text-align:center}
@@ -214,7 +223,7 @@ footer .soc a:hover{background:var(--clay)}
   .subtoggle{width:100%;justify-content:space-between;padding:15px 28px;font-size:1.06rem;border-bottom:1px solid var(--line)}
   .submenu{position:static;transform:none;box-shadow:none;border:none;border-radius:0;padding:0;background:var(--sand);min-width:0}
   .submenu a{padding:13px 40px;font-size:.98rem;border-bottom:1px solid var(--line);white-space:normal}
-  .hero .inner,.pr,.feat,.vp,.tg,.sgrid,.tst,footer .cols{grid-template-columns:1fr}
+  .hero .inner,.pr,.feat,.vp,.tg,.sgrid,.tst,.team,footer .cols{grid-template-columns:1fr}
   .hero .inner{padding:60px 22px 96px;gap:42px}.hero-photo{max-width:420px;margin:0 auto}
   .hero .mtns{bottom:-12%;height:92%}
   .pr .ph{order:-1}.pr .ph::before{inset:12px -12px -12px 12px}.sgrid::before{display:none}
@@ -269,6 +278,7 @@ function buildMountains(){
     +paths+fog+forest+'</svg>';
 }
 const MOUNTAINS=buildMountains();
+const PERSON='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8.2" r="4.3"/><path d="M12 14c-5.1 0-8.2 3.1-8.2 7.2h16.4C20.2 17.1 17.1 14 12 14z"/></svg>';
 function toggleNav(btn){const h=document.querySelector('header');const open=h.classList.toggle('nav-open');if(btn)btn.innerHTML=open?'✕':'☰';}
 function closeNav(){const h=document.querySelector('header');if(h)h.classList.remove('nav-open');const b=document.querySelector('.burger');if(b)b.innerHTML='☰';document.querySelectorAll('.navitem.open').forEach(n=>n.classList.remove('open'));}
 function toggleSub(btn){btn.closest('.navitem').classList.toggle('open');}
@@ -277,6 +287,7 @@ let pxEls=[];
 function parallax(){const vh=window.innerHeight;for(const el of pxEls){const p=el.parentElement.getBoundingClientRect();const off=(p.top+p.height/2)-vh/2;el.style.transform='translate3d(0,'+(off*(parseFloat(el.dataset.px)||0))+'px,0)';}}
 window.addEventListener('scroll',()=>requestAnimationFrame(parallax),{passive:true});
 window.addEventListener('resize',()=>requestAnimationFrame(parallax),{passive:true});
+window.addEventListener('hashchange',function(){var el;try{el=document.querySelector(location.hash);}catch(e){}if(el)el.scrollIntoView({block:'start'});});
 fetch('../../manifest.json').then(r=>r.json()).then(render).catch(e=>{document.getElementById('app').innerHTML='<p style="padding:80px;text-align:center">Could not load manifest.json — '+J(e.message)+'</p>';});
 function render(m){
   const hs=m.homepage.sections,id=x=>hs.find(s=>s.id===x);
@@ -285,7 +296,7 @@ function render(m){
   document.getElementById('app').innerHTML=`
   <header><div class="wrap nav">
     <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
-    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="#treatments">All Treatments</a>${m.treatments.map(t=>`<a href=".${t.path}">${J(t.name)}</a>`).join('')}</div></div><a href="#about">Meet Traci</a><a href="./about/#team">Meet the Team</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
+    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="#treatments">All Treatments</a>${m.treatments.map(t=>`<a href=".${t.path}">${J(t.name)}</a>`).join('')}</div></div><a href="#about">Meet Traci</a><a href="#team">Meet the Team</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
     <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
@@ -320,6 +331,11 @@ function render(m){
   <section id="about"><div class="wrap pr">
     <div class="ph reveal"><div class="ph-glow"></div><img src="../../assets/images/practitioner-traci.jpg" alt="${J(pr.name)}"><div class="ph-badge"><span class="vintage">Est. Maryville</span><b>Traci</b><i>MSN, FNP-C</i></div></div>
     <div class="reveal"><span class="kw">${J(pr.eyebrow)}</span><h2>${J(pr.name)}</h2><p class="role" style="margin-bottom:1rem">Founder &amp; Lead Practitioner</p><p style="font-size:1.08rem">${J(pr.body)}</p><a class="btn teal" style="margin-top:1.5rem" href="${BOOK}" target="_blank" rel="noopener">Book With Traci</a></div>
+  </div></section>
+
+  <section id="team" style="background:var(--linen)"><div class="wrap">
+    <div class="intro reveal"><span class="kw" style="justify-content:center;display:inline-flex">The People Behind Your Care</span><h2 style="margin-top:.7rem;font-family:var(--serif);font-weight:600">Meet the Team</h2><p style="margin-top:1rem">OptimalJoy is growing. Meet the friendly faces caring for you — with more joining our family soon.</p></div>
+    <div class="team">${[{r:"Front of House & Sales",b:"Your first warm welcome — greeting guests, booking appointments, and making every visit effortless."},{r:"Nurse Practitioner",b:"Expert, compassionate clinical care across our wellness and aesthetic services."},{r:"Role TBD",n:"To Be Announced",b:"We're expanding our team. A new member will be joining us here very soon."}].map(tm=>`<div class="tm reveal"><div class="avatar">${PERSON}</div><div class="tm-soon">Photo coming soon</div><h3>${tm.n||'Coming Soon'}</h3><div class="role">${J(tm.r)}</div><p>${J(tm.b)}</p></div>`).join('')}</div>
   </div></section>
 
   <section id="treatments" style="background:var(--sand)"><div class="wrap">

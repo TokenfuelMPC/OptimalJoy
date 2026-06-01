@@ -38,7 +38,7 @@ const CSS = `
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.62;font-size:1.1rem;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.62;font-size:1.1rem;-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 h1,h2,h3,h4{font-family:var(--disp);color:var(--ink);font-weight:600;line-height:1.08;letter-spacing:0}
 .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
@@ -234,7 +234,7 @@ function header(){
   const sub = `<div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="${H}/#treatments">All Treatments</a>${TREATMENTS.map(t=>`<a href="${H}/${t.slug}/">${esc(t.name)}</a>`).join('')}</div></div>`;
   return `<header><div class="wrap nav">
     <a href="${H}/"><img src="${A}/logo/Optimal-Joy-Logo.svg" alt="OptimalJoy Wellness & Aesthetics"></a>
-    <nav class="links">${sub}<a href="${H}/about/">Meet Traci</a><a href="${H}/about/#team">Meet the Team</a><a href="${H}/#process">How It Works</a><a href="${H}/contact/">Contact</a></nav>
+    <nav class="links">${sub}<a href="${H}/about/">Meet Traci</a><a href="${H}/#team">Meet the Team</a><a href="${H}/#process">How It Works</a><a href="${H}/contact/">Contact</a></nav>
     <a class="btn bookbtn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>`;
@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded',function(){
   setTimeout(hashScroll,90);
 });
 window.addEventListener('load',function(){setTimeout(hashScroll,120);});
+window.addEventListener('hashchange',function(){try{var el=document.querySelector(location.hash);if(el)el.scrollIntoView({block:'start'});}catch(e){}});
 </script>`;
 
 /* ---------------- section renderers ---------------- */
