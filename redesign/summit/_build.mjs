@@ -234,7 +234,7 @@ function header(){
   const sub = `<div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="${H}/#treatments">All Treatments</a>${TREATMENTS.map(t=>`<a href="${H}/${t.slug}/">${esc(t.name)}</a>`).join('')}</div></div>`;
   return `<header><div class="wrap nav">
     <a href="${H}/"><img src="${A}/logo/Optimal-Joy-Logo.svg" alt="OptimalJoy Wellness & Aesthetics"></a>
-    <nav class="links">${sub}<a href="${H}/about/">Meet Traci</a><a href="${H}/#process">How It Works</a><a href="${H}/contact/">Contact</a></nav>
+    <nav class="links">${sub}<a href="${H}/about/">Meet Traci</a><a href="${H}/about/#team">Meet the Team</a><a href="${H}/#process">How It Works</a><a href="${H}/contact/">Contact</a></nav>
     <a class="btn bookbtn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>`;
@@ -259,11 +259,14 @@ function toggleSub(b){b.closest('.navitem').classList.toggle('open');}
 function toggleQA(b){const qa=b.closest('.qa');const a=qa.querySelector('.ans');const open=qa.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':'0';}
 function popup(t,b){document.getElementById('mTitle').textContent=t;document.getElementById('mBody').textContent=b;document.getElementById('modal').classList.add('open');}
 function formDemo(e){e.preventDefault();popup('Request received','This is a design preview — in production this form connects securely to the OptimalJoy patient system. No data was submitted.');return false;}
+function hashScroll(){if(!location.hash)return;try{var el=document.querySelector(location.hash);if(!el)return;var h=document.documentElement,prev=h.style.scrollBehavior;h.style.scrollBehavior='auto';el.scrollIntoView({block:'start'});h.style.scrollBehavior=prev;}catch(e){}}
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  setTimeout(hashScroll,90);
 });
+window.addEventListener('load',function(){setTimeout(hashScroll,120);});
 </script>`;
 
 /* ---------------- section renderers ---------------- */
@@ -294,7 +297,7 @@ const R = {
   form:s=>`<section><div class="narrow"><div class="prose center reveal" style="margin-bottom:30px">${s.intro?`<p class="lead">${esc(s.intro)}</p>`:''}</div><form class="formwrap reveal" onsubmit="return formDemo(event)">${s.fieldsets.map(fs=>`<fieldset><legend>${esc(fs.legend)}</legend>${fs.fields.map(f=>field(f)).join('')}${fs.note?`<div class="securenote"><span>🔒</span><span>${esc(fs.note)}</span></div>`:''}</fieldset>`).join('')}<button class="btn teal" type="submit" style="width:100%;justify-content:center">${esc(s.submit||'Submit Request')}</button></form></div></section>`,
   cta:s=>`<section class="cta"><div class="wrap"><span class="kw c">${esc(s.eyebrow||'Begin Your Journey')}</span><h2 style="margin-top:.7rem">${esc(s.heading)}</h2><a class="btn" href="${BOOK}" target="_blank" rel="noopener">${esc(s.button||'Book Appointment')}</a></div></section>`,
   html:s=>`<section${s.bg?` style="background:${s.bg}"`:''}><div class="wrap reveal">${s.content}</div></section>`,
-  team:s=>`<section${s.bg?` style="background:${s.bg}"`:''}><div class="wrap"><div class="prose center reveal"><span class="kw c">${esc(s.eyebrow||'Our Team')}</span><h2 style="margin-top:.5rem">${esc(s.heading||'Meet the Team')}</h2>${s.intro?`<p>${esc(s.intro)}</p>`:''}</div><div class="team reveal">${s.members.map(m=>`<div class="tm"><div class="avatar">${PERSON}</div>${m.photoSoon===false?'':'<div class="tm-soon">Photo coming soon</div>'}<h3>${esc(m.name)}</h3><div class="role">${esc(m.role)}</div><p>${esc(m.bio)}</p></div>`).join('')}</div></div></section>`,
+  team:s=>`<section id="team"${s.bg?` style="background:${s.bg}"`:''}><div class="wrap"><div class="prose center reveal"><span class="kw c">${esc(s.eyebrow||'Our Team')}</span><h2 style="margin-top:.5rem">${esc(s.heading||'Meet the Team')}</h2>${s.intro?`<p>${esc(s.intro)}</p>`:''}</div><div class="team reveal">${s.members.map(m=>`<div class="tm"><div class="avatar">${PERSON}</div>${m.photoSoon===false?'':'<div class="tm-soon">Photo coming soon</div>'}<h3>${esc(m.name)}</h3><div class="role">${esc(m.role)}</div><p>${esc(m.bio)}</p></div>`).join('')}</div></div></section>`,
 };
 const PERSON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8.2" r="4.3"/><path d="M12 14c-5.1 0-8.2 3.1-8.2 7.2h16.4C20.2 17.1 17.1 14 12 14z"/></svg>`;
 function field(f){

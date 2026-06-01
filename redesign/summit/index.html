@@ -285,7 +285,7 @@ function render(m){
   document.getElementById('app').innerHTML=`
   <header><div class="wrap nav">
     <a href="#top"><img src="../../assets/logo/Optimal-Joy-Logo.svg" alt="${J(m.site.name)}"></a>
-    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="#treatments">All Treatments</a>${m.treatments.map(t=>`<a href=".${t.path}">${J(t.name)}</a>`).join('')}</div></div><a href="#about">Meet Traci</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
+    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="#treatments">All Treatments</a>${m.treatments.map(t=>`<a href=".${t.path}">${J(t.name)}</a>`).join('')}</div></div><a href="#about">Meet Traci</a><a href="./about/#team">Meet the Team</a><a href="#process">How It Works</a><a href="#contact">Contact</a></nav>
     <a class="btn" href="${BOOK}" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
@@ -357,6 +357,7 @@ function render(m){
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
   pxEls=[...document.querySelectorAll('[data-px]')];parallax();
+  if(location.hash){try{var _e=document.querySelector(location.hash);if(_e)setTimeout(function(){var h=document.documentElement,pv=h.style.scrollBehavior;h.style.scrollBehavior='auto';_e.scrollIntoView({block:'start'});h.style.scrollBehavior=pv;},70);}catch(e){}}
 }
 </script>
 </body>

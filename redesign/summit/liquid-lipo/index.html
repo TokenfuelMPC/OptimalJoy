@@ -209,7 +209,7 @@ footer .soc a:hover{background:var(--clay)}
 </style></head><body>
 <header><div class="wrap nav">
     <a href="../"><img src="../../../assets/logo/Optimal-Joy-Logo.svg" alt="OptimalJoy Wellness & Aesthetics"></a>
-    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="../#treatments">All Treatments</a><a href="../hormone-replacement-therapy/">Hormone Replacement Therapy</a><a href="../prescription-weight-loss/">Medical Weight Loss</a><a href="../dermal-fillers-lips/">Dermal Fillers / Lips</a><a href="../medical-grade-chemical-peel/">Medical Grade Chemical Peel</a><a href="../microneedling-with-rf/">Microneedling with RF</a><a href="../liquid-lipo/">Liquid Lipo</a><a href="../neurotoxin-treatment/">Neurotoxin Treatment</a></div></div><a href="../about/">Meet Traci</a><a href="../#process">How It Works</a><a href="../contact/">Contact</a></nav>
+    <nav class="links"><div class="navitem has-sub"><button class="subtoggle" onclick="toggleSub(this)">Treatments <span class="caret">▾</span></button><div class="submenu"><a class="all" href="../#treatments">All Treatments</a><a href="../hormone-replacement-therapy/">Hormone Replacement Therapy</a><a href="../prescription-weight-loss/">Medical Weight Loss</a><a href="../dermal-fillers-lips/">Dermal Fillers / Lips</a><a href="../medical-grade-chemical-peel/">Medical Grade Chemical Peel</a><a href="../microneedling-with-rf/">Microneedling with RF</a><a href="../liquid-lipo/">Liquid Lipo</a><a href="../neurotoxin-treatment/">Neurotoxin Treatment</a></div></div><a href="../about/">Meet Traci</a><a href="../about/#team">Meet the Team</a><a href="../#process">How It Works</a><a href="../contact/">Contact</a></nav>
     <a class="btn bookbtn" href="https://www.optimantra.com/optimus/om/patient/login" target="_blank" rel="noopener">Book Appointment</a>
     <button class="burger" aria-label="Menu" onclick="toggleNav(this)">&#9776;</button>
   </div></header>
@@ -236,10 +236,13 @@ function toggleSub(b){b.closest('.navitem').classList.toggle('open');}
 function toggleQA(b){const qa=b.closest('.qa');const a=qa.querySelector('.ans');const open=qa.classList.toggle('open');a.style.maxHeight=open?a.scrollHeight+'px':'0';}
 function popup(t,b){document.getElementById('mTitle').textContent=t;document.getElementById('mBody').textContent=b;document.getElementById('modal').classList.add('open');}
 function formDemo(e){e.preventDefault();popup('Request received','This is a design preview — in production this form connects securely to the OptimalJoy patient system. No data was submitted.');return false;}
+function hashScroll(){if(!location.hash)return;try{var el=document.querySelector(location.hash);if(!el)return;var h=document.documentElement,prev=h.style.scrollBehavior;h.style.scrollBehavior='auto';el.scrollIntoView({block:'start'});h.style.scrollBehavior=prev;}catch(e){}}
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',closeNav));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  setTimeout(hashScroll,90);
 });
+window.addEventListener('load',function(){setTimeout(hashScroll,120);});
 </script>
 </body></html>
