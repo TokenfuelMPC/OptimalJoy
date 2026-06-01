@@ -109,6 +109,17 @@ header{position:sticky;top:0;z-index:50;background:rgba(253,249,241,.88);backdro
 .card li:last-child{border-bottom:none}
 .card li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem}
 
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:46px}
+.tm{text-align:center;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:38px 26px;transition:.3s}
+.tm:hover{transform:translateY(-6px);box-shadow:var(--sh);border-color:var(--bronze)}
+.tm .avatar{width:128px;height:128px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(150deg,var(--sand),var(--clay));display:grid;place-items:center;border:3px solid #fff;box-shadow:var(--sh);position:relative;overflow:hidden}
+.tm .avatar>svg{width:66px;height:66px;color:rgba(255,255,255,.92);margin-top:-6px}
+.tm-soon{font-family:var(--sans);font-style:italic;font-size:.86rem;color:var(--muted);margin-bottom:8px;letter-spacing:.02em}
+.tm h3{font-size:1.45rem;margin-bottom:3px}
+.tm .role{font-family:var(--vintage);text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:var(--clay);font-weight:600;margin-bottom:12px}
+.tm p{font-size:1.02rem;color:var(--text)}
+
 /* split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .split .ph img{border-radius:var(--r);box-shadow:var(--sh)}
@@ -210,7 +221,7 @@ footer .soc a:hover{background:var(--clay)}
   .navitem.has-sub{display:block}
   .submenu{position:static;display:none;box-shadow:none;border:none;border-radius:0;padding:0;background:var(--sand);min-width:0}
   .submenu a{padding:13px 40px;border-bottom:1px solid var(--line);white-space:normal}
-  .cards,.cards.two,.split,.steps,.steps.s3,.pricegroups,.contactgrid,footer .cols{grid-template-columns:1fr}
+  .cards,.cards.two,.split,.steps,.steps.s3,.pricegroups,.contactgrid,.team,footer .cols{grid-template-columns:1fr}
   .split .ph{order:-1}.field.row2{grid-template-columns:1fr}
   section{padding:64px 0}
 }
@@ -283,7 +294,9 @@ const R = {
   form:s=>`<section><div class="narrow"><div class="prose center reveal" style="margin-bottom:30px">${s.intro?`<p class="lead">${esc(s.intro)}</p>`:''}</div><form class="formwrap reveal" onsubmit="return formDemo(event)">${s.fieldsets.map(fs=>`<fieldset><legend>${esc(fs.legend)}</legend>${fs.fields.map(f=>field(f)).join('')}${fs.note?`<div class="securenote"><span>🔒</span><span>${esc(fs.note)}</span></div>`:''}</fieldset>`).join('')}<button class="btn teal" type="submit" style="width:100%;justify-content:center">${esc(s.submit||'Submit Request')}</button></form></div></section>`,
   cta:s=>`<section class="cta"><div class="wrap"><span class="kw c">${esc(s.eyebrow||'Begin Your Journey')}</span><h2 style="margin-top:.7rem">${esc(s.heading)}</h2><a class="btn" href="${BOOK}" target="_blank" rel="noopener">${esc(s.button||'Book Appointment')}</a></div></section>`,
   html:s=>`<section${s.bg?` style="background:${s.bg}"`:''}><div class="wrap reveal">${s.content}</div></section>`,
+  team:s=>`<section${s.bg?` style="background:${s.bg}"`:''}><div class="wrap"><div class="prose center reveal"><span class="kw c">${esc(s.eyebrow||'Our Team')}</span><h2 style="margin-top:.5rem">${esc(s.heading||'Meet the Team')}</h2>${s.intro?`<p>${esc(s.intro)}</p>`:''}</div><div class="team reveal">${s.members.map(m=>`<div class="tm"><div class="avatar">${PERSON}</div>${m.photoSoon===false?'':'<div class="tm-soon">Photo coming soon</div>'}<h3>${esc(m.name)}</h3><div class="role">${esc(m.role)}</div><p>${esc(m.bio)}</p></div>`).join('')}</div></div></section>`,
 };
+const PERSON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8.2" r="4.3"/><path d="M12 14c-5.1 0-8.2 3.1-8.2 7.2h16.4C20.2 17.1 17.1 14 12 14z"/></svg>`;
 function field(f){
   if(f.type==='checkbox') return `<div class="field"><div class="checkrow"><input type="checkbox" id="${f.id||''}" ${f.required?'required':''}><label for="${f.id||''}" style="margin:0">${esc(f.label)}</label></div>${f.note?`<div class="note">${esc(f.note)}</div>`:''}</div>`;
   if(f.type==='textarea') return `<div class="field"><label>${esc(f.label)}</label><textarea rows="4" placeholder="${esc(f.ph||'')}" ${f.required?'required':''}></textarea></div>`;
@@ -481,6 +494,11 @@ PAGES.push({ slug:"about", title:"About OptimalJoy", crumb:null, eyebrow:"Meet Y
       {title:"Affordable Care",icon:"✦",body:"Effective, accessible treatments so beauty and health are within reach for everyone."},
       {title:"Expert Hands",icon:"◆",body:"Years of clinical experience behind every personalized treatment plan."},
       {title:"Real Results",icon:"❋",body:"Services that go beyond expectations — visible, lasting, and deeply appreciated."},
+    ]},
+    {type:"team",bg:"var(--linen)",eyebrow:"The People Behind Your Care",heading:"Meet the Team",intro:"OptimalJoy is growing. Meet the friendly faces caring for you — with more joining our family soon.",members:[
+      {name:"Coming Soon",role:"Front of House & Sales",bio:"Your first warm welcome — greeting guests, booking appointments, and making every visit effortless."},
+      {name:"Coming Soon",role:"Nurse Practitioner",bio:"Expert, compassionate clinical care across our wellness and aesthetic services."},
+      {name:"To Be Announced",role:"Role TBD",bio:"We're expanding our team. A new member will be joining us here very soon."},
     ]},
   ]});
 
